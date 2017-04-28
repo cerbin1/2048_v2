@@ -11,7 +11,7 @@ public class Application {
     JFrame frame = new JFrame("1024");
     int[][] fields = new Fields().getFields();
 
-    void initializeFewFields() {
+    private void initializeFewFields() {
         fields[0][0] = 2;
         fields[1][0] = 2;
     }
@@ -71,7 +71,7 @@ public class Application {
         System.out.println(keyCode);
         for (int i = 2; i >= 0; i--) {
             for (int j = 0; j <= i; j++) {
-                if(canMove(i)) {
+                if (canMove(i)) {
                     fields[i + 1][0] += fields[i][0];
                     fields[i][0] = 0;
                 }
@@ -83,6 +83,16 @@ public class Application {
                 System.out.print(fields[i][j] + " ");
             }
             System.out.println();
+        }
+
+        updateJButtons();
+    }
+
+    private void updateJButtons() {
+        for (int i = 0; i < fields.length; i++) {
+            for (int j = 0; j < fields[i].length; j++) {
+                tiles[i][j].setText(Integer.toString(fields[i][j]));
+            }
         }
     }
 
