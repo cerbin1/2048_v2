@@ -7,14 +7,13 @@ import java.awt.event.KeyListener;
 import java.util.Arrays;
 
 public class Application {
-    Field[][] fields = new Field[4][4];
+    Tiles[][] tiles = new Tiles[4][4];
     JFrame frame = new JFrame("1024");
-    Fields dd = new Fields();
-    int[][] dupa = dd.getFields();
+    int[][] fields = new Fields().getFields();
 
-    void kek() {
-        dupa[0][0] = 2;
-        dupa[1][0] = 2;
+    void initializeFewFields() {
+        fields[0][0] = 2;
+        fields[1][0] = 2;
     }
 
 
@@ -30,7 +29,7 @@ public class Application {
 
             @Override
             public void keyPressed(KeyEvent e) {
-                move(e.getKeyCode(), dupa);
+                move(e.getKeyCode(), fields);
             }
 
             @Override
@@ -39,8 +38,8 @@ public class Application {
             }
         });
         initializeFields();
-        kek();
-        System.out.println(Arrays.deepToString(dupa));
+        initializeFewFields();
+        System.out.println(Arrays.deepToString(fields));
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
@@ -50,7 +49,7 @@ public class Application {
     public void initializeFields() {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                fields[i][j] = new Field(createSingleJButton());
+                tiles[i][j] = new Tiles(createSingleJButton());
             }
         }
     }
@@ -70,44 +69,27 @@ public class Application {
 
     public void move(int keyCode, int[][] array) {
         System.out.println(keyCode);
-        for (int i = 3; i > 0; i--) {
-            for (int j = 2; j < i; j++) {
-                System.out.println(i + " " + j);
+        for (int i = 2; i >= 0; i--) {
+            for (int j = 0; j <= i; j++) {
+                if(canMove(i)) {
+                    fields[i + 1][0] += fields[i][0];
+                    fields[i][0] = 0;
+                }
             }
             System.out.println();
         }
-        System.out.println(Arrays.deepToString(dupa));
-        /*if (array[0][0] == array[1][0] && array[2][0] == array[3][0]) {
-            array[3][0] = array[2][0] + array[3][0];
-            array[2][0] = array[0][0] + array[1][0];
-            array[0][0] = 0;
-            array[1][0] = 0;
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                System.out.print(fields[i][j] + " ");
+            }
+            System.out.println();
         }
-        else if (array[2][0] == array[3][0]) {
-            array[3][0] += array[3][0];
-            array[2][0] = 0;
-        } else if (array[1][0] == array[2][0]) {
-            array[2][0] += array[1][0];
-            array[1][0] = 0;
-        } else if (array[0][0] == array[1][0]) {
-            array[1][0] += array[0][0];
-            array[0][0] = 0;
-        } else if (array[1][0] == array[3][0] && array[2][0] == 0) {
-            array[3][0] += array[1][0];
-            array[1][0] = 0;
-        } else if (array[0][0] == array[2][0] && array[1][0] == 0) {
-            array[2][0] += array[0][0];
-            array[0][0] = 0;
-        } else if (array[0][0] == array[3][0] && array[1][0] == 0 && array[2][0] == 0) {
-            array[3][0] += array[0][0];
-            array[0][0] = 0;
-        }*/
     }
 
     private boolean canMove(int i) {
         if (i >= 3) {
             return false;
         }
-        return dupa[i][0] == dupa[i + 1][0] || dupa[i + 1][0] == 0;
+        return fields[i][0] == fields[i + 1][0] || fields[i + 1][0] == 0;
     }
 }

@@ -6,7 +6,7 @@ public class Fields {
     public Fields() {
         fields = new int[4][4];
         for (int i = 0; i < 4; i++) {
-            for (int j = 0; j <4; j++) {
+            for (int j = 0; j < 4; j++) {
                 fields[i][j] = 0;
             }
         }
