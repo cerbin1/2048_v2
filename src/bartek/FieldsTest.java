@@ -21,7 +21,7 @@ public class FieldsTest {
         fields.setValue(0, 3, 2);
 
         // when
-        application.move(40);
+        application.move(40, fields.getFields());
 
         // then
         assertArrayEquals(new int[][]{
@@ -43,7 +43,7 @@ public class FieldsTest {
         fields.setValue(3, 0, 2);
 
         // when
-        application.move(40);
+        application.move(40, fields.getFields());
 
         // then
         assertArrayEquals(new int[][]{
@@ -66,7 +66,7 @@ public class FieldsTest {
         fields.setValue(3, 1, 2);
 
         // when
-        application.move(40);
+        application.move(40, fields.getFields());
 
         // then
         assertArrayEquals(new int[][]{
@@ -79,6 +79,30 @@ public class FieldsTest {
     }
 
     @Test
+    public void shouldJoinFourFieldsInOneColumn() {
+        Application application = Application();
+
+        Fields fields = new Fields();
+        fields.setValue(0, 0, 2);
+        fields.setValue(1, 0, 2);
+        fields.setValue(2, 0, 4);
+        fields.setValue(3, 0, 4);
+
+        // when
+        application.move(40, fields.getFields());
+
+        // then
+        assertArrayEquals(new int[][]{
+                        {0, 0, 0, 0},
+                        {0, 0, 0, 0},
+                        {4, 0, 0, 0},
+                        {8, 0, 0, 0}},
+                fields.getFields()
+        );
+    }
+
+
+    @Test
     public void shouldJoinFieldsAndStopOnField() {
         Application application = Application();
 
@@ -88,7 +112,7 @@ public class FieldsTest {
         fields.setValue(3, 0, 4);
 
         // when
-        application.move(40);
+        application.move(40, fields.getFields());
 
         // then
         assertArrayEquals(new int[][]{
@@ -109,7 +133,7 @@ public class FieldsTest {
         fields.setValue(3, 0, 4);
 
         // when
-        application.move(40);
+        application.move(40, fields.getFields());
 
         // then
         assertArrayEquals(new int[][]{
@@ -131,7 +155,7 @@ public class FieldsTest {
         fields.setValue(2, 0, 4);
 
         // when
-        application.move(40);
+        application.move(40, fields.getFields());
 
         // then
         assertArrayEquals(new int[][]{
@@ -157,7 +181,7 @@ public class FieldsTest {
         fields.setValue(3, 3, 2);
 
         // when
-        application.move(40);
+        application.move(40, fields.getFields());
 
         // then
         assertArrayEquals(new int[][]{
