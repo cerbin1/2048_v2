@@ -2,7 +2,6 @@ package bartek;
 
 import org.junit.Test;
 
-import static java.awt.event.KeyEvent.VK_S;
 import static org.junit.Assert.assertArrayEquals;
 
 public class FieldsTest {
@@ -22,7 +21,7 @@ public class FieldsTest {
         fields.setValue(0, 3, 2);
 
         // when
-        application.move(VK_S);
+        application.move(40);
 
         // then
         assertArrayEquals(new int[][]{
@@ -44,7 +43,7 @@ public class FieldsTest {
         fields.setValue(3, 0, 2);
 
         // when
-        application.move(VK_S);
+        application.move(40);
 
         // then
         assertArrayEquals(new int[][]{
@@ -67,7 +66,7 @@ public class FieldsTest {
         fields.setValue(3, 1, 2);
 
         // when
-        application.move(VK_S);
+        application.move(40);
 
         // then
         assertArrayEquals(new int[][]{
@@ -89,7 +88,7 @@ public class FieldsTest {
         fields.setValue(3, 0, 4);
 
         // when
-        application.move(VK_S);
+        application.move(40);
 
         // then
         assertArrayEquals(new int[][]{
@@ -99,6 +98,74 @@ public class FieldsTest {
                         {4, 0, 0, 0}},
                 fields.getFields()
         );
+    }
 
+    @Test
+    public void shouldNotJoinDifferentFields() {
+        Application application = Application();
+
+        Fields fields = new Fields();
+        fields.setValue(2, 0, 2);
+        fields.setValue(3, 0, 4);
+
+        // when
+        application.move(40);
+
+        // then
+        assertArrayEquals(new int[][]{
+                        {0, 0, 0, 0},
+                        {0, 0, 0, 0},
+                        {2, 0, 0, 0},
+                        {4, 0, 0, 0}},
+                fields.getFields()
+        );
+    }
+
+    @Test
+    public void shouldMoveFieldsButNotJoin() {
+        // given
+        Application application = Application();
+
+        Fields fields = new Fields();
+        fields.setValue(0, 0, 2);
+        fields.setValue(2, 0, 4);
+
+        // when
+        application.move(40);
+
+        // then
+        assertArrayEquals(new int[][]{
+                        {0, 0, 0, 0},
+                        {0, 0, 0, 0},
+                        {2, 0, 0, 0},
+                        {4, 0, 0, 0}},
+                fields.getFields());
+    }
+
+    @Test
+    public void shouldNotMoveWhenNoSpaceAndFieldsToJoin() {
+        Application application = Application();
+
+        Fields fields = new Fields();
+        fields.setValue(0, 0, 2);
+        fields.setValue(1, 0, 4);
+        fields.setValue(2, 0, 8);
+        fields.setValue(3, 0, 16);
+        fields.setValue(2, 1, 2);
+        fields.setValue(3, 1, 4);
+        fields.setValue(3, 2, 2);
+        fields.setValue(3, 3, 2);
+
+        // when
+        application.move(40);
+
+        // then
+        assertArrayEquals(new int[][]{
+                        {2, 0, 0, 0},
+                        {4, 0, 0, 0},
+                        {8, 2, 0, 0},
+                        {16, 4, 2, 2}},
+                fields.getFields()
+        );
     }
 }
