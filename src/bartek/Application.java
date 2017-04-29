@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Random;
 
 public class Application {
     Tile[][] tiles = new Tile[4][4];
@@ -17,10 +18,10 @@ public class Application {
     }
 
     private void initializeFewFields() {
-        fields[0][0] = 2;
-        fields[1][0] = 2;
-        fields[2][0] = 2;
-        fields[3][0] = 2;
+        Random random = new Random();
+        for (int i = 0; i < 10; i++) {
+            fields[random.nextInt(4)][random.nextInt(4)] = 2;
+        }
     }
 
 
@@ -81,7 +82,7 @@ public class Application {
             }
         }
         displayFields(fields);
-//        updateJButtons();
+        updateJButtons();
     }
 
     private void displayFields(int[][] array) {
