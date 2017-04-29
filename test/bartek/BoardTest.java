@@ -221,6 +221,7 @@ public class BoardTest {
 
         board.setValue(1, 0, 2);
         board.setValue(2, 0, 2);
+        board.setValue(3, 0, 2);
         board.setValue(0, 1, 4);
         board.setValue(1, 1, 4);
         board.setValue(2, 2, 16);
@@ -234,7 +235,7 @@ public class BoardTest {
         // then
         assertArrayEquals(new int[][]{
                         {4, 8, 32, 256},
-                        {0, 0, 0, 0},
+                        {2, 0, 0, 0},
                         {0, 0, 0, 0},
                         {0, 0, 0, 0}},
                 board.getFields()
@@ -274,9 +275,9 @@ public class BoardTest {
         Board board = new Board();
         Application application = Application(board);
 
-        board.setValue(0, 0, 4);
+        board.setValue(0, 0, 2);
         board.setValue(1, 0, 2);
-        board.setValue(2, 0, 2);
+        board.setValue(2, 0, 32);
         board.setValue(0, 3, 16);
         board.setValue(1, 3, 4);
         board.setValue(2, 3, 4);
@@ -287,7 +288,7 @@ public class BoardTest {
         // then
         assertArrayEquals(new int[][]{
                         {4, 0, 0, 16},
-                        {4, 0, 0, 8},
+                        {32, 0, 0, 8},
                         {0, 0, 0, 0},
                         {0, 0, 0, 0}},
                 board.getFields()
