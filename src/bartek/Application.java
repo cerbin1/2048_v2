@@ -8,8 +8,13 @@ import java.awt.event.KeyListener;
 public class Application {
     Tiles[][] tiles = new Tiles[4][4];
     JFrame frame = new JFrame("1024");
-    Board board = new Board();
-    int[][] fields = board.getFields();
+    final Board board;
+    int[][] fields;
+
+    public Application(Board board) {
+        this.board = board;
+        fields = board.getFields();
+    }
 
     private void initializeFewFields() {
         fields[0][0] = 2;
@@ -31,7 +36,7 @@ public class Application {
 
             @Override
             public void keyPressed(KeyEvent e) {
-                move(e.getKeyCode(), fields);
+                move(e.getKeyCode());
             }
 
             @Override
@@ -65,20 +70,17 @@ public class Application {
         return jButton;
     }
 
-    public void move(int keyCode, int[][] array) {
+    public void move(int keyCode) {
         System.out.println(keyCode);
         for (int k = 0; k < 4; k++) {
-            joinFieldsIfPossible(k, array);
+            board.joinFieldsIfPossible(k);
             for (int i = 0; i < 3; i++) {
                 for (int j = 0; j < 3 - i; j++) {
-                    if (canMove(j, k, array)) {
-                        array[j + 1][k] = array[j][k];
-                        array[j][k] = 0;
-                    }
+                    board.moveIfPossible(j, k);
                 }
             }
         }
-        displayFields(array);
+        displayFields(fields);
 //        updateJButtons();
     }
 
@@ -91,30 +93,6 @@ public class Application {
         }
     }
 
-    private void joinFieldsIfPossible(int y, int[][] array) {
-        if (canJoinFourFields(y, array)) {
-            array[1][y] += array[0][y];
-            array[0][y] = 0;
-            array[3][y] += array[2][y];
-            array[2][y] = 0;
-        }
-        for (int i = 3; i > 0; i--) {
-            if (canJoinTwoFields(i, y, array)) {
-                array[i][y] += array[i - 1][y];
-                array[i - 1][y] = 0;
-                return;
-            }
-        }
-    }
-
-    private boolean canJoinFourFields(int y, int[][] array) {
-        return array[0][y] == array[1][y] && array[2][y] == array[3][y];
-    }
-
-    private boolean canJoinTwoFields(int x, int y, int[][] array) {
-        return array[x][y] != 0 && array[x][y] == array[x - 1][y];
-    }
-
     private void updateJButtons() {
         for (int i = 0; i < fields.length; i++) {
             for (int j = 0; j < fields[i].length; j++) {
@@ -123,11 +101,7 @@ public class Application {
         }
     }
 
-    private boolean canMove(int x, int y, int[][] array) {
-        return x <= 2 && array[x + 1][y] == 0;
-    }
-
     public static void main(String[] args) {
-        new Application().displayFrame();
+        new Application(new Board()).displayFrame();
     }
 }

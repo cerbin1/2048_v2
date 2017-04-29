@@ -5,23 +5,24 @@ import org.junit.Test;
 import static org.junit.Assert.assertArrayEquals;
 
 public class BoardTest {
-    private static Application Application() {
-        return new Application();
+    private static Application Application(Board board) {
+        return new Application(board);
     }
 
     @Test
     public void shouldMoveFieldsDown() {
         // given
-        Application application = Application();
 
         Board board = new Board();
+        Application application = Application(board);
+
         board.setValue(0, 0, 2);
         board.setValue(0, 1, 2);
         board.setValue(0, 2, 2);
         board.setValue(0, 3, 2);
 
         // when
-        application.move(40, board.getFields());
+        application.move(40);
 
         // then
         assertArrayEquals(new int[][]{
@@ -36,14 +37,14 @@ public class BoardTest {
     @Test
     public void shouldJoinTwoFields() {
         // given
-        Application application = Application();
-
         Board board = new Board();
+        Application application = Application(board);
+
         board.setValue(2, 0, 2);
         board.setValue(3, 0, 2);
 
         // when
-        application.move(40, board.getFields());
+        application.move(40);
 
         // then
         assertArrayEquals(new int[][]{
@@ -57,16 +58,16 @@ public class BoardTest {
 
     @Test
     public void shouldJoinFourFields() {
-        Application application = Application();
-
         Board board = new Board();
+        Application application = Application(board);
+
         board.setValue(2, 0, 2);
         board.setValue(3, 0, 2);
         board.setValue(2, 1, 2);
         board.setValue(3, 1, 2);
 
         // when
-        application.move(40, board.getFields());
+        application.move(40);
 
         // then
         assertArrayEquals(new int[][]{
@@ -80,16 +81,16 @@ public class BoardTest {
 
     @Test
     public void shouldJoinFourFieldsInOneColumn() {
-        Application application = Application();
-
         Board board = new Board();
+        Application application = Application(board);
+
         board.setValue(0, 0, 2);
         board.setValue(1, 0, 2);
         board.setValue(2, 0, 4);
         board.setValue(3, 0, 4);
 
         // when
-        application.move(40, board.getFields());
+        application.move(40);
 
         // then
         assertArrayEquals(new int[][]{
@@ -104,15 +105,15 @@ public class BoardTest {
 
     @Test
     public void shouldJoinFieldsAndStopOnField() {
-        Application application = Application();
-
         Board board = new Board();
+        Application application = Application(board);
+
         board.setValue(0, 0, 2);
         board.setValue(1, 0, 2);
         board.setValue(3, 0, 4);
 
         // when
-        application.move(40, board.getFields());
+        application.move(40);
 
         // then
         assertArrayEquals(new int[][]{
@@ -126,14 +127,14 @@ public class BoardTest {
 
     @Test
     public void shouldNotJoinDifferentFields() {
-        Application application = Application();
-
         Board board = new Board();
+        Application application = Application(board);
+
         board.setValue(2, 0, 2);
         board.setValue(3, 0, 4);
 
         // when
-        application.move(40, board.getFields());
+        application.move(40);
 
         // then
         assertArrayEquals(new int[][]{
@@ -148,14 +149,14 @@ public class BoardTest {
     @Test
     public void shouldMoveFieldsButNotJoin() {
         // given
-        Application application = Application();
-
         Board board = new Board();
+        Application application = Application(board);
+
         board.setValue(0, 0, 2);
         board.setValue(2, 0, 4);
 
         // when
-        application.move(40, board.getFields());
+        application.move(40);
 
         // then
         assertArrayEquals(new int[][]{
@@ -168,9 +169,9 @@ public class BoardTest {
 
     @Test
     public void shouldNotMoveWhenNoSpaceAndFieldsToJoin() {
-        Application application = Application();
-
         Board board = new Board();
+        Application application = Application(board);
+
         board.setValue(0, 0, 2);
         board.setValue(1, 0, 4);
         board.setValue(2, 0, 8);
@@ -181,7 +182,7 @@ public class BoardTest {
         board.setValue(3, 3, 2);
 
         // when
-        application.move(40, board.getFields());
+        application.move(40);
 
         // then
         assertArrayEquals(new int[][]{
