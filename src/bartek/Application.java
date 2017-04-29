@@ -8,7 +8,8 @@ import java.awt.event.KeyListener;
 public class Application {
     Tiles[][] tiles = new Tiles[4][4];
     JFrame frame = new JFrame("1024");
-    int[][] fields = new Fields().getFields();
+    Board board = new Board();
+    int[][] fields = board.getFields();
 
     private void initializeFewFields() {
         fields[0][0] = 2;

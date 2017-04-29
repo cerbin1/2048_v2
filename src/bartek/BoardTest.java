@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertArrayEquals;
 
-public class FieldsTest {
+public class BoardTest {
     private static Application Application() {
         return new Application();
     }
@@ -14,14 +14,14 @@ public class FieldsTest {
         // given
         Application application = Application();
 
-        Fields fields = new Fields();
-        fields.setValue(0, 0, 2);
-        fields.setValue(0, 1, 2);
-        fields.setValue(0, 2, 2);
-        fields.setValue(0, 3, 2);
+        Board board = new Board();
+        board.setValue(0, 0, 2);
+        board.setValue(0, 1, 2);
+        board.setValue(0, 2, 2);
+        board.setValue(0, 3, 2);
 
         // when
-        application.move(40, fields.getFields());
+        application.move(40, board.getFields());
 
         // then
         assertArrayEquals(new int[][]{
@@ -29,7 +29,7 @@ public class FieldsTest {
                         {0, 0, 0, 0},
                         {0, 0, 0, 0},
                         {2, 2, 2, 2}},
-                fields.getFields()
+                board.getFields()
         );
     }
 
@@ -38,12 +38,12 @@ public class FieldsTest {
         // given
         Application application = Application();
 
-        Fields fields = new Fields();
-        fields.setValue(2, 0, 2);
-        fields.setValue(3, 0, 2);
+        Board board = new Board();
+        board.setValue(2, 0, 2);
+        board.setValue(3, 0, 2);
 
         // when
-        application.move(40, fields.getFields());
+        application.move(40, board.getFields());
 
         // then
         assertArrayEquals(new int[][]{
@@ -51,7 +51,7 @@ public class FieldsTest {
                         {0, 0, 0, 0},
                         {0, 0, 0, 0},
                         {4, 0, 0, 0}},
-                fields.getFields()
+                board.getFields()
         );
     }
 
@@ -59,14 +59,14 @@ public class FieldsTest {
     public void shouldJoinFourFields() {
         Application application = Application();
 
-        Fields fields = new Fields();
-        fields.setValue(2, 0, 2);
-        fields.setValue(3, 0, 2);
-        fields.setValue(2, 1, 2);
-        fields.setValue(3, 1, 2);
+        Board board = new Board();
+        board.setValue(2, 0, 2);
+        board.setValue(3, 0, 2);
+        board.setValue(2, 1, 2);
+        board.setValue(3, 1, 2);
 
         // when
-        application.move(40, fields.getFields());
+        application.move(40, board.getFields());
 
         // then
         assertArrayEquals(new int[][]{
@@ -74,7 +74,7 @@ public class FieldsTest {
                         {0, 0, 0, 0},
                         {0, 0, 0, 0},
                         {4, 4, 0, 0}},
-                fields.getFields()
+                board.getFields()
         );
     }
 
@@ -82,14 +82,14 @@ public class FieldsTest {
     public void shouldJoinFourFieldsInOneColumn() {
         Application application = Application();
 
-        Fields fields = new Fields();
-        fields.setValue(0, 0, 2);
-        fields.setValue(1, 0, 2);
-        fields.setValue(2, 0, 4);
-        fields.setValue(3, 0, 4);
+        Board board = new Board();
+        board.setValue(0, 0, 2);
+        board.setValue(1, 0, 2);
+        board.setValue(2, 0, 4);
+        board.setValue(3, 0, 4);
 
         // when
-        application.move(40, fields.getFields());
+        application.move(40, board.getFields());
 
         // then
         assertArrayEquals(new int[][]{
@@ -97,7 +97,7 @@ public class FieldsTest {
                         {0, 0, 0, 0},
                         {4, 0, 0, 0},
                         {8, 0, 0, 0}},
-                fields.getFields()
+                board.getFields()
         );
     }
 
@@ -106,13 +106,13 @@ public class FieldsTest {
     public void shouldJoinFieldsAndStopOnField() {
         Application application = Application();
 
-        Fields fields = new Fields();
-        fields.setValue(0, 0, 2);
-        fields.setValue(1, 0, 2);
-        fields.setValue(3, 0, 4);
+        Board board = new Board();
+        board.setValue(0, 0, 2);
+        board.setValue(1, 0, 2);
+        board.setValue(3, 0, 4);
 
         // when
-        application.move(40, fields.getFields());
+        application.move(40, board.getFields());
 
         // then
         assertArrayEquals(new int[][]{
@@ -120,7 +120,7 @@ public class FieldsTest {
                         {0, 0, 0, 0},
                         {4, 0, 0, 0},
                         {4, 0, 0, 0}},
-                fields.getFields()
+                board.getFields()
         );
     }
 
@@ -128,12 +128,12 @@ public class FieldsTest {
     public void shouldNotJoinDifferentFields() {
         Application application = Application();
 
-        Fields fields = new Fields();
-        fields.setValue(2, 0, 2);
-        fields.setValue(3, 0, 4);
+        Board board = new Board();
+        board.setValue(2, 0, 2);
+        board.setValue(3, 0, 4);
 
         // when
-        application.move(40, fields.getFields());
+        application.move(40, board.getFields());
 
         // then
         assertArrayEquals(new int[][]{
@@ -141,7 +141,7 @@ public class FieldsTest {
                         {0, 0, 0, 0},
                         {2, 0, 0, 0},
                         {4, 0, 0, 0}},
-                fields.getFields()
+                board.getFields()
         );
     }
 
@@ -150,12 +150,12 @@ public class FieldsTest {
         // given
         Application application = Application();
 
-        Fields fields = new Fields();
-        fields.setValue(0, 0, 2);
-        fields.setValue(2, 0, 4);
+        Board board = new Board();
+        board.setValue(0, 0, 2);
+        board.setValue(2, 0, 4);
 
         // when
-        application.move(40, fields.getFields());
+        application.move(40, board.getFields());
 
         // then
         assertArrayEquals(new int[][]{
@@ -163,25 +163,25 @@ public class FieldsTest {
                         {0, 0, 0, 0},
                         {2, 0, 0, 0},
                         {4, 0, 0, 0}},
-                fields.getFields());
+                board.getFields());
     }
 
     @Test
     public void shouldNotMoveWhenNoSpaceAndFieldsToJoin() {
         Application application = Application();
 
-        Fields fields = new Fields();
-        fields.setValue(0, 0, 2);
-        fields.setValue(1, 0, 4);
-        fields.setValue(2, 0, 8);
-        fields.setValue(3, 0, 16);
-        fields.setValue(2, 1, 2);
-        fields.setValue(3, 1, 4);
-        fields.setValue(3, 2, 2);
-        fields.setValue(3, 3, 2);
+        Board board = new Board();
+        board.setValue(0, 0, 2);
+        board.setValue(1, 0, 4);
+        board.setValue(2, 0, 8);
+        board.setValue(3, 0, 16);
+        board.setValue(2, 1, 2);
+        board.setValue(3, 1, 4);
+        board.setValue(3, 2, 2);
+        board.setValue(3, 3, 2);
 
         // when
-        application.move(40, fields.getFields());
+        application.move(40, board.getFields());
 
         // then
         assertArrayEquals(new int[][]{
@@ -189,7 +189,7 @@ public class FieldsTest {
                         {4, 0, 0, 0},
                         {8, 2, 0, 0},
                         {16, 4, 2, 2}},
-                fields.getFields()
+                board.getFields()
         );
     }
 }

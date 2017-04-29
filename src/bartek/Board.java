@@ -1,9 +1,9 @@
 package bartek;
 
-public class Fields {
+public class Board {
     int[][] fields;
 
-    public Fields() {
+    public Board() {
         fields = new int[4][4];
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
@@ -18,5 +18,9 @@ public class Fields {
 
     public int[][] getFields() {
         return fields;
+    }
+
+    public void joinFieldsIfPossible(int y) {
+
     }
 }
