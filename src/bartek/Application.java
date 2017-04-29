@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Arrays;
 
 public class Application {
     Tiles[][] tiles = new Tiles[4][4];
@@ -14,10 +13,12 @@ public class Application {
     private void initializeFewFields() {
         fields[0][0] = 2;
         fields[1][0] = 2;
+        fields[2][0] = 2;
+        fields[3][0] = 2;
     }
 
 
-    public void displayFrame() throws InterruptedException {
+    public void displayFrame() {
         frame.setSize(200, 200);
         frame.setLocationRelativeTo(null);
         frame.setLayout(new GridLayout(4, 4));
@@ -37,16 +38,17 @@ public class Application {
 
             }
         });
-        initializeFields();
+        initializeTiles();
         initializeFewFields();
-        System.out.println(Arrays.deepToString(fields));
+
+        updateJButtons();
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
         frame.pack();
     }
 
-    public void initializeFields() {
+    public void initializeTiles() {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 tiles[i][j] = new Tiles(createSingleJButton());
@@ -62,30 +64,43 @@ public class Application {
         return jButton;
     }
 
-    public static void main(String[] args) throws InterruptedException {
-        new Application().displayFrame();
-
-    }
-
     public void move(int keyCode, int[][] array) {
         System.out.println(keyCode);
-        for (int i = 2; i >= 0; i--) {
-            for (int j = 0; j <= i; j++) {
-                if (canMove(i)) {
-                    fields[i + 1][0] += fields[i][0];
-                    fields[i][0] = 0;
+        joinFieldsIfPossible();
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3 - i; j++) {
+                if (canMove(j)) {
+                    fields[j + 1][0] = fields[j][0];
+                    fields[j][0] = 0;
                 }
             }
-            System.out.println();
         }
+        displayFields();
+        updateJButtons();
+    }
+
+    private void displayFields() {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 System.out.print(fields[i][j] + " ");
             }
             System.out.println();
         }
+    }
 
-        updateJButtons();
+    private void joinFieldsIfPossible() {
+        for (int i = 3; i > 0; i--) {
+            if (fields[i][0] != 0) {
+                if (fields[i][0] == fields[i - 1][0]) {
+                    fields[i][0] += fields[i - 1][0];
+                    fields[i - 1][0] = 0;
+                    return;
+                }
+            }
+            if (fields[i - 1][0] == 0) {
+                System.out.println("jest puste");
+            }
+        }
     }
 
     private void updateJButtons() {
@@ -97,9 +112,10 @@ public class Application {
     }
 
     private boolean canMove(int i) {
-        if (i >= 3) {
-            return false;
-        }
-        return fields[i][0] == fields[i + 1][0] || fields[i + 1][0] == 0;
+        return i <= 2 && fields[i + 1][0] == 0;
+    }
+
+    public static void main(String[] args) {
+        new Application().displayFrame();
     }
 }
