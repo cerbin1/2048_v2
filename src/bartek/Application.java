@@ -90,17 +90,16 @@ public class Application {
 
     private void joinFieldsIfPossible() {
         for (int i = 3; i > 0; i--) {
-            if (fields[i][0] != 0) {
-                if (fields[i][0] == fields[i - 1][0]) {
-                    fields[i][0] += fields[i - 1][0];
-                    fields[i - 1][0] = 0;
-                    return;
-                }
-            }
-            if (fields[i - 1][0] == 0) {
-                System.out.println("jest puste");
+            if (canJoinTwoFields(i)) {
+                fields[i][0] += fields[i - 1][0];
+                fields[i - 1][0] = 0;
+                return;
             }
         }
+    }
+
+    private boolean canJoinTwoFields(int i) {
+        return fields[i][0] != 0 && fields[i][0] == fields[i - 1][0];
     }
 
     private void updateJButtons() {
