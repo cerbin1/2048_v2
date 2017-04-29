@@ -2,10 +2,10 @@ package bartek;
 
 import javax.swing.*;
 
-public class Tiles {
+public class Tile {
     private JButton button;
 
-    public Tiles(JButton button) {
+    public Tile(JButton button) {
         this.button = button;
     }
 

@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class Application {
-    Tiles[][] tiles = new Tiles[4][4];
+    Tile[][] tiles = new Tile[4][4];
     JFrame frame = new JFrame("1024");
     final Board board;
     int[][] fields;
@@ -57,7 +57,7 @@ public class Application {
     public void initializeTiles() {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                tiles[i][j] = new Tiles(createSingleJButton());
+                tiles[i][j] = new Tile(createSingleJButton());
             }
         }
     }
