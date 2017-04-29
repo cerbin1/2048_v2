@@ -66,40 +66,52 @@ public class Application {
 
     public void move(int keyCode, int[][] array) {
         System.out.println(keyCode);
-        joinFieldsIfPossible();
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3 - i; j++) {
-                if (canMove(j)) {
-                    fields[j + 1][0] = fields[j][0];
-                    fields[j][0] = 0;
+        for (int k = 0; k < 4; k++) {
+            joinFieldsIfPossible(k, array);
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3 - i; j++) {
+                    if (canMove(j, k, array)) {
+                        array[j + 1][k] = array[j][k];
+                        array[j][k] = 0;
+                    }
                 }
             }
         }
-        displayFields();
-        updateJButtons();
+        displayFields(array);
+//        updateJButtons();
     }
 
-    private void displayFields() {
+    private void displayFields(int[][] array) {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                System.out.print(fields[i][j] + " ");
+                System.out.print(array[i][j] + " ");
             }
             System.out.println();
         }
     }
 
-    private void joinFieldsIfPossible() {
+    private void joinFieldsIfPossible(int y, int[][] array) {
+        if (canJoinFourFields(y, array)) {
+            array[1][y] += array[0][y];
+            array[0][y] = 0;
+            array[3][y] += array[2][y];
+            array[2][y] = 0;
+        }
         for (int i = 3; i > 0; i--) {
-            if (canJoinTwoFields(i)) {
-                fields[i][0] += fields[i - 1][0];
-                fields[i - 1][0] = 0;
+            if (canJoinTwoFields(i, y, array)) {
+                array[i][y] += array[i - 1][y];
+                array[i - 1][y] = 0;
                 return;
             }
         }
     }
 
-    private boolean canJoinTwoFields(int i) {
-        return fields[i][0] != 0 && fields[i][0] == fields[i - 1][0];
+    private boolean canJoinFourFields(int y, int[][] array) {
+        return array[0][y] == array[1][y] && array[2][y] == array[3][y];
+    }
+
+    private boolean canJoinTwoFields(int x, int y, int[][] array) {
+        return array[x][y] != 0 && array[x][y] == array[x - 1][y];
     }
 
     private void updateJButtons() {
@@ -110,8 +122,8 @@ public class Application {
         }
     }
 
-    private boolean canMove(int i) {
-        return i <= 2 && fields[i + 1][0] == 0;
+    private boolean canMove(int x, int y, int[][] array) {
+        return x <= 2 && array[x + 1][y] == 0;
     }
 
     public static void main(String[] args) {
