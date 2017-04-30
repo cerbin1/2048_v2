@@ -9,6 +9,14 @@ public class BoardTest {
         return new Application(board);
     }
 
+    private static void setFields(int[][] fields, Board board) {
+        for (int y = 0; y < 4; y++) {
+            for (int x = 0; x < 4; x++) {
+                board.setValue(x, y, fields[x][y]);
+            }
+        }
+    }
+
     @Test
     public void shouldMoveFieldsDown() {
         // given
@@ -16,10 +24,11 @@ public class BoardTest {
         Board board = new Board();
         Application application = Application(board);
 
-        board.setValue(0, 0, 2);
-        board.setValue(0, 1, 2);
-        board.setValue(0, 2, 2);
-        board.setValue(0, 3, 2);
+        setFields(new int[][]{
+                {2, 2, 2, 2},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0}}, board);
 
         // when
         application.move(40);
@@ -40,14 +49,11 @@ public class BoardTest {
         Board board = new Board();
         Application application = Application(board);
 
-        board.setValue(2, 0, 2);
-        board.setValue(3, 0, 2);
-        board.setValue(1, 1, 4);
-        board.setValue(0, 1, 4);
-        board.setValue(1, 2, 16);
-        board.setValue(2, 2, 16);
-        board.setValue(2, 3, 128);
-        board.setValue(3, 3, 128);
+        setFields(new int[][]{
+                {2, 0, 16, 128},
+                {2, 4, 0, 0},
+                {0, 4, 0, 128},
+                {0, 0, 16, 0}}, board);
 
         // when
         application.move(40);
@@ -63,19 +69,17 @@ public class BoardTest {
     }
 
 
-
     @Test
     public void shouldPreferFieldsOnBottomDown() {
         // given
         Board board = new Board();
         Application application = Application(board);
 
-        board.setValue(1, 0, 2);
-        board.setValue(2, 0, 2);
-        board.setValue(3, 0, 2);
-        board.setValue(0, 2, 16);
-        board.setValue(2, 2, 16);
-        board.setValue(3, 2, 16);
+        setFields(new int[][]{
+                {2, 0, 16, 0},
+                {2, 0, 0, 0},
+                {2, 0, 16, 0},
+                {0, 0, 16, 0}}, board);
 
         // when
         application.move(40);
@@ -95,14 +99,11 @@ public class BoardTest {
         Board board = new Board();
         Application application = Application(board);
 
-        board.setValue(0, 0, 2);
-        board.setValue(1, 0, 2);
-        board.setValue(2, 0, 4);
-        board.setValue(3, 0, 4);
-        board.setValue(0, 2, 16);
-        board.setValue(1, 2, 16);
-        board.setValue(2, 2, 128);
-        board.setValue(3, 2, 128);
+        setFields(new int[][]{
+                {2, 0, 0, 16},
+                {2, 0, 0, 16},
+                {4, 0, 0, 64},
+                {4, 0, 0, 64}}, board);
 
         // when
         application.move(40);
@@ -111,8 +112,8 @@ public class BoardTest {
         assertArrayEquals(new int[][]{
                         {0, 0, 0, 0},
                         {0, 0, 0, 0},
-                        {4, 0, 32, 0},
-                        {8, 0, 256, 0}},
+                        {4, 0, 0, 32},
+                        {8, 0, 0, 128}},
                 board.getFields()
         );
     }
@@ -123,12 +124,11 @@ public class BoardTest {
         Board board = new Board();
         Application application = Application(board);
 
-        board.setValue(0, 0, 2);
-        board.setValue(1, 0, 2);
-        board.setValue(3, 0, 4);
-        board.setValue(0, 3, 4);
-        board.setValue(1, 3, 4);
-        board.setValue(2, 3, 16);
+        setFields(new int[][]{
+                {2, 4, 0, 0},
+                {2, 0, 0, 0},
+                {4, 4, 0, 0},
+                {0, 16, 0, 0}}, board);
 
         // when
         application.move(40);
@@ -137,8 +137,8 @@ public class BoardTest {
         assertArrayEquals(new int[][]{
                         {0, 0, 0, 0},
                         {0, 0, 0, 0},
-                        {4, 0, 0, 8},
-                        {4, 0, 0, 16}},
+                        {4, 8, 0, 0},
+                        {4, 16, 0, 0}},
                 board.getFields()
         );
     }
@@ -148,11 +148,11 @@ public class BoardTest {
         Board board = new Board();
         Application application = Application(board);
 
-        board.setValue(2, 0, 2);
-        board.setValue(3, 0, 4);
-        board.setValue(2, 1, 16);
-        board.setValue(3, 1, 32);
-
+        setFields(new int[][]{
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {2, 16, 0, 0},
+                {4, 32, 0, 0}}, board);
         // when
         application.move(40);
 
@@ -171,11 +171,11 @@ public class BoardTest {
         // given
         Board board = new Board();
         Application application = Application(board);
-
-        board.setValue(0, 0, 2);
-        board.setValue(2, 0, 4);
-        board.setValue(0, 3, 4);
-        board.setValue(2, 3, 8);
+        setFields(new int[][]{
+                {2, 0, 0, 0},
+                {0, 0, 0, 4},
+                {4, 0, 0, 0},
+                {0, 0, 0, 8}}, board);
 
         // when
         application.move(40);
@@ -193,15 +193,11 @@ public class BoardTest {
     public void shouldNotMoveWhenNoSpaceAndFieldsToJoinDown() {
         Board board = new Board();
         Application application = Application(board);
-
-        board.setValue(0, 0, 2);
-        board.setValue(1, 0, 4);
-        board.setValue(2, 0, 8);
-        board.setValue(3, 0, 16);
-        board.setValue(2, 1, 2);
-        board.setValue(3, 1, 4);
-        board.setValue(3, 2, 2);
-        board.setValue(3, 3, 2);
+        setFields(new int[][]{
+                {2, 0, 0, 0},
+                {4, 0, 0, 0},
+                {8, 2, 0, 0},
+                {16, 4, 2, 2}}, board);
 
         // when
         application.move(40);
@@ -223,10 +219,11 @@ public class BoardTest {
         Board board = new Board();
         Application application = Application(board);
 
-        board.setValue(3, 0, 2);
-        board.setValue(3, 1, 2);
-        board.setValue(3, 2, 2);
-        board.setValue(3, 3, 2);
+        setFields(new int[][]{
+                {0, 0, 0, 0},
+                {0, 0, 2, 0},
+                {0, 2, 0, 0},
+                {2, 0, 0, 2}}, board);
 
         // when
         application.move(38);
@@ -247,21 +244,18 @@ public class BoardTest {
         Board board = new Board();
         Application application = Application(board);
 
-        board.setValue(1, 0, 2);
-        board.setValue(2, 0, 2);
-        board.setValue(0, 1, 4);
-        board.setValue(1, 1, 4);
-        board.setValue(2, 2, 16);
-        board.setValue(3, 2, 16);
-        board.setValue(1, 3, 128);
-        board.setValue(2, 3, 128);
+        setFields(new int[][]{
+                {0, 0, 8, 0},
+                {2, 0, 0, 32},
+                {0, 4, 0, 0},
+                {2, 4, 8, 32}}, board);
 
         // when
         application.move(38);
 
         // then
         assertArrayEquals(new int[][]{
-                        {4, 8, 32, 256},
+                        {4, 8, 16, 64},
                         {0, 0, 0, 0},
                         {0, 0, 0, 0},
                         {0, 0, 0, 0}},
@@ -275,12 +269,11 @@ public class BoardTest {
         Board board = new Board();
         Application application = Application(board);
 
-        board.setValue(1, 0, 2);
-        board.setValue(2, 0, 2);
-        board.setValue(3, 0, 2);
-        board.setValue(0, 2, 16);
-        board.setValue(2, 2, 16);
-        board.setValue(3, 2, 16);
+        setFields(new int[][]{
+                {0, 0, 16, 0},
+                {2, 0, 16, 0},
+                {2, 0, 0, 0},
+                {2, 0, 16, 0}}, board);
 
         // when
         application.move(38);
@@ -300,14 +293,11 @@ public class BoardTest {
         Board board = new Board();
         Application application = Application(board);
 
-        board.setValue(0, 0, 2);
-        board.setValue(1, 0, 2);
-        board.setValue(2, 0, 4);
-        board.setValue(3, 0, 4);
-        board.setValue(0, 2, 16);
-        board.setValue(1, 2, 16);
-        board.setValue(2, 2, 128);
-        board.setValue(3, 2, 128);
+        setFields(new int[][]{
+                {2, 0, 16, 0},
+                {2, 0, 16, 0},
+                {4, 0, 128, 0},
+                {4, 0, 128, 0}}, board);
 
         // when
         application.move(38);
@@ -328,20 +318,19 @@ public class BoardTest {
         Board board = new Board();
         Application application = Application(board);
 
-        board.setValue(0, 0, 2);
-        board.setValue(1, 0, 2);
-        board.setValue(2, 0, 32);
-        board.setValue(0, 3, 16);
-        board.setValue(1, 3, 4);
-        board.setValue(2, 3, 4);
+        setFields(new int[][]{
+                {0, 0, 0, 16},
+                {32, 0, 0, 8},
+                {2, 0, 0, 0},
+                {2, 0, 0, 8}}, board);
 
         // when
         application.move(38);
 
         // then
         assertArrayEquals(new int[][]{
+                        {32, 0, 0, 16},
                         {4, 0, 0, 16},
-                        {32, 0, 0, 8},
                         {0, 0, 0, 0},
                         {0, 0, 0, 0}},
                 board.getFields()
@@ -353,10 +342,11 @@ public class BoardTest {
         Board board = new Board();
         Application application = Application(board);
 
-        board.setValue(0, 0, 2);
-        board.setValue(1, 0, 4);
-        board.setValue(0, 1, 16);
-        board.setValue(1, 1, 32);
+        setFields(new int[][]{
+                {2, 16, 0, 0},
+                {4, 32, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0}}, board);
 
         // when
         application.move(38);
@@ -377,10 +367,11 @@ public class BoardTest {
         Board board = new Board();
         Application application = Application(board);
 
-        board.setValue(1, 0, 2);
-        board.setValue(2, 0, 4);
-        board.setValue(2, 3, 4);
-        board.setValue(3, 3, 8);
+        setFields(new int[][]{
+                {0, 0, 0, 0},
+                {2, 0, 0, 0},
+                {0, 0, 0, 4},
+                {4, 0, 0, 8}}, board);
 
         // when
         application.move(38);
@@ -399,14 +390,11 @@ public class BoardTest {
         Board board = new Board();
         Application application = Application(board);
 
-        board.setValue(0, 0, 2);
-        board.setValue(1, 0, 4);
-        board.setValue(2, 0, 8);
-        board.setValue(3, 0, 16);
-        board.setValue(0, 1, 2);
-        board.setValue(1, 1, 4);
-        board.setValue(0, 2, 2);
-        board.setValue(0, 3, 2);
+        setFields(new int[][]{
+                {2, 2, 2, 2},
+                {4, 4, 0, 0},
+                {8, 0, 0, 0},
+                {16, 0, 0, 0}}, board);
 
         // when
         application.move(38);
