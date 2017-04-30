@@ -15,6 +15,7 @@ public class Application {
     public Application(Board board) {
         this.board = board;
         fields = board.getFields();
+        initializeTiles();
     }
 
     private void initializeFewFields() {
@@ -45,7 +46,6 @@ public class Application {
 
             }
         });
-        initializeTiles();
         initializeFewFields();
 
         updateJButtons();
@@ -64,7 +64,7 @@ public class Application {
     }
 
     private JButton createSingleJButton() {
-        JButton jButton = new JButton("0");
+        JButton jButton = new JButton("");
         jButton.setPreferredSize(new Dimension(50, 50));
         jButton.setEnabled(false);
         frame.add(jButton);
@@ -73,14 +73,18 @@ public class Application {
 
     public void move(int keyCode) {
         System.out.println(keyCode);
-        for (int k = 0; k < 4; k++) {
-            board.joinFieldsIfPossible(k);
-            for (int i = 0; i < 3; i++) {
-                for (int j = 0; j < 3 - i; j++) {
-                    board.moveIfPossible(j, k);
-                }
+        if (keyCode == 40) {
+            for (int y = 0; y < 4; y++) {
+                board.performMoveOnColumn(y, 1);
             }
         }
+
+        if (keyCode == 38) {
+            for (int y = 0; y < 4; y++) {
+                board.performMoveOnColumn(y, -1);
+            }
+        }
+
         displayFields(fields);
         updateJButtons();
     }

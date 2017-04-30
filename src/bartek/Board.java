@@ -20,38 +20,59 @@ public class Board {
         return fields;
     }
 
-    public void joinFieldsIfPossible(int y) {
+    public void performMoveOnColumn(int y, int direction) {
         if (canJoinFourFields(y)) {
-            fields[1][y] += fields[0][y];
-            fields[0][y] = 0;
-            fields[3][y] += fields[2][y];
-            fields[2][y] = 0;
+            joinFourFields(y);
+        } else {
+            joinTwo(y);
         }
-        for (int i = 3; i > 0; i--) {
-            if (canJoinTwoFields(i, y)) {
-                fields[i][y] += fields[i - 1][y];
-                fields[i - 1][y] = 0;
-                return;
-            }
-        }
+        move(y, direction);
     }
 
     private boolean canJoinFourFields(int y) {
         return fields[0][y] == fields[1][y] && fields[2][y] == fields[3][y];
     }
 
-    private boolean canJoinTwoFields(int x, int y) {
-        return fields[x][y] != 0 && fields[x][y] == fields[x - 1][y];
+    private void joinFourFields(int y) {
+        fields[1][y] += fields[0][y];
+        fields[0][y] = 0;
+        fields[3][y] += fields[2][y];
+        fields[2][y] = 0;
     }
 
-    public void moveIfPossible(int j, int k) {
-        if (canMove(j, k)) {
-            fields[j + 1][k] = fields[j][k];
-            fields[j][k] = 0;
+    private void joinTwo(int y) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 3; j > i; j--) {
+                if (fields[j][y] != 0 && fields[j][y] == fields[j - 1][y]) {
+                    fields[j][y] += fields[j - 1][y];
+                    fields[j - 1][y] = 0;
+                    return;
+                }
+            }
         }
     }
 
-    private boolean canMove(int x, int y) {
-        return x <= 2 && fields[x + 1][y] == 0;
+    private void move(int y, int direction) {
+        if (direction == 1) {
+            for (int i = 0; i < 3; i++) {
+                for (int x = 0; x < 3 - i; x++) {
+                    moveIfPossible(x, y, direction);
+                }
+            }
+        }
+        if (direction == -1) {
+            for (int i = 0; i < 3; i++) {
+                for (int x = 3; x > 0; x--) {
+                    moveIfPossible(x, y, direction);
+                }
+            }
+        }
+    }
+
+    public void moveIfPossible(int x, int y, int direction) {
+        if (x + direction <= 3 && x + direction >= 0 && fields[x + direction][y] == 0) {
+            fields[x + direction][y] = fields[x][y];
+            fields[x][y] = 0;
+        }
     }
 }
