@@ -62,6 +62,34 @@ public class BoardTest {
         );
     }
 
+
+
+    @Test
+    public void shouldPreferFieldsOnBottomDown() {
+        // given
+        Board board = new Board();
+        Application application = Application(board);
+
+        board.setValue(1, 0, 2);
+        board.setValue(2, 0, 2);
+        board.setValue(3, 0, 2);
+        board.setValue(0, 2, 16);
+        board.setValue(2, 2, 16);
+        board.setValue(3, 2, 16);
+
+        // when
+        application.move(40);
+
+        // then
+        assertArrayEquals(new int[][]{
+                        {0, 0, 0, 0},
+                        {0, 0, 0, 0},
+                        {2, 0, 16, 0},
+                        {4, 0, 32, 0}},
+                board.getFields()
+        );
+    }
+
     @Test
     public void shouldJoinFourFieldsInAColumnDown() {
         Board board = new Board();
@@ -221,7 +249,6 @@ public class BoardTest {
 
         board.setValue(1, 0, 2);
         board.setValue(2, 0, 2);
-        board.setValue(3, 0, 2);
         board.setValue(0, 1, 4);
         board.setValue(1, 1, 4);
         board.setValue(2, 2, 16);
@@ -235,7 +262,33 @@ public class BoardTest {
         // then
         assertArrayEquals(new int[][]{
                         {4, 8, 32, 256},
-                        {2, 0, 0, 0},
+                        {0, 0, 0, 0},
+                        {0, 0, 0, 0},
+                        {0, 0, 0, 0}},
+                board.getFields()
+        );
+    }
+
+    @Test
+    public void shouldPreferFieldsOnTopUp() {
+        // given
+        Board board = new Board();
+        Application application = Application(board);
+
+        board.setValue(1, 0, 2);
+        board.setValue(2, 0, 2);
+        board.setValue(3, 0, 2);
+        board.setValue(0, 2, 16);
+        board.setValue(2, 2, 16);
+        board.setValue(3, 2, 16);
+
+        // when
+        application.move(38);
+
+        // then
+        assertArrayEquals(new int[][]{
+                        {4, 0, 32, 0},
+                        {2, 0, 16, 0},
                         {0, 0, 0, 0},
                         {0, 0, 0, 0}},
                 board.getFields()
