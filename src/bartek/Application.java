@@ -81,7 +81,7 @@ public class Application {
 
         if (keyCode == 38) {
             for (int col = 0; col < 4; col++) {
-
+                board.joinColumn(col);
             }
         }
 

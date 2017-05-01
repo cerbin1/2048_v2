@@ -19,4 +19,12 @@ public class Board {
     public int[][] getFields() {
         return fields;
     }
+
+    public void joinColumn(int col) {
+        Row row = new Row(fields[col][0], fields[col][1], fields[col][2], fields[col][3]);
+        int[] array = row.joinAndMove();
+        for (int i = 0; i < array.length; i++) {
+            fields[col][i] = array[i];
+        }
+    }
 }
