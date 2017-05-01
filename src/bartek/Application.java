@@ -56,9 +56,9 @@ public class Application {
     }
 
     public void initializeTiles() {
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                tiles[i][j] = new Tile(createSingleJButton());
+        for (int y = 0; y < 4; y++) {
+            for (int x = 0; x < 4; x++) {
+                tiles[x][y] = new Tile(createSingleJButton());
             }
         }
     }
@@ -74,14 +74,14 @@ public class Application {
     public void move(int keyCode) {
         System.out.println(keyCode);
         if (keyCode == 40) {
-            for (int y = 0; y < 4; y++) {
-                board.performMoveOnColumn(y, 1);
+            for (int col = 0; col < 4; col++) {
+
             }
         }
 
         if (keyCode == 38) {
-            for (int y = 0; y < 4; y++) {
-                board.performMoveOnColumn(y, -1);
+            for (int col = 0; col < 4; col++) {
+
             }
         }
 
@@ -90,18 +90,18 @@ public class Application {
     }
 
     private void displayFields(int[][] array) {
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                System.out.print(array[i][j] + " ");
+        for (int y = 0; y < 4; y++) {
+            for (int x = 0; x < 4; x++) {
+                System.out.print(array[x][y] + " ");
             }
             System.out.println();
         }
     }
 
     private void updateJButtons() {
-        for (int i = 0; i < fields.length; i++) {
-            for (int j = 0; j < fields[i].length; j++) {
-                tiles[i][j].setText(Integer.toString(fields[i][j]));
+        for (int y = 0; y < fields.length; y++) {
+            for (int x = 0; x < fields[y].length; x++) {
+                tiles[x][y].setText(Integer.toString(fields[x][y]));
             }
         }
     }
