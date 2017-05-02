@@ -10,19 +10,21 @@ public class Application {
     Tile[][] tiles = new Tile[4][4];
     JFrame frame = new JFrame("1024");
     final Board board;
-    int[][] fields;
 
     public Application(Board board) {
         this.board = board;
-        fields = board.getFields();
         initializeTiles();
     }
 
     private void initializeFewFields() {
         Random random = new Random();
-        for (int i = 0; i < 10; i++) {
-            fields[random.nextInt(4)][random.nextInt(4)] = 2;
+        for (int i = 0; i < 50; i++) {
+            getFields()[random.nextInt(4)][random.nextInt(4)] = 2;
         }
+    }
+
+    int[][] getFields() {
+        return board.getFields();
     }
 
 
@@ -85,7 +87,7 @@ public class Application {
             }
         }
 
-        displayFields(fields);
+        displayFields(getFields());
         updateJButtons();
     }
 
@@ -99,9 +101,9 @@ public class Application {
     }
 
     private void updateJButtons() {
-        for (int y = 0; y < fields.length; y++) {
-            for (int x = 0; x < fields[y].length; x++) {
-                tiles[x][y].setText(Integer.toString(fields[x][y]));
+        for (int y = 0; y < 4; y++) {
+            for (int x = 0; x < 4; x++) {
+                tiles[x][y].setText(Integer.toString(getFields()[x][y]));
             }
         }
     }
