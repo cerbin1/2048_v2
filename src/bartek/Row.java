@@ -11,7 +11,8 @@ public class Row {
         for (int i = 0; i < 3; i++) {
             if (row[i] == 0) {
                 moveEmptyFieldsOnEnd(i);
-            } else if (row[i + 1] == 0) {
+            }
+            if (row[i + 1] == 0) {
                 moveEmptyFieldsOnEnd(i + 1);
             }
             if (canJoinFields(i)) {
