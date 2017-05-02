@@ -20,11 +20,20 @@ public class Board {
         return fields;
     }
 
-    public void joinColumn(int col) {
-        Row row = new Row(fields[col][0], fields[col][1], fields[col][2], fields[col][3]);
+    public void up(int x) {
+        Row row = new Row(fields[x][0], fields[x][1], fields[x][2], fields[x][3]);
         int[] array = row.joinAndMove();
-        for (int i = 0; i < array.length; i++) {
-            fields[col][i] = array[i];
+        for (int i = 0; i < 4; i++) {
+            fields[x][i] = array[i];
         }
+    }
+
+    public void down(int x) {
+        Row row = new Row(fields[x][3], fields[x][2], fields[x][1], fields[x][0]);
+        int[] array = row.joinAndMove();
+        fields[x][3] = array[0];
+        fields[x][2] = array[1];
+        fields[x][1] = array[2];
+        fields[x][0] = array[3];
     }
 }

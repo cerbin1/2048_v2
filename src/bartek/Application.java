@@ -76,14 +76,14 @@ public class Application {
     public void move(int keyCode) {
         System.out.println(keyCode);
         if (keyCode == 40) {
-            for (int col = 0; col < 4; col++) {
-
+            for (int x = 0; x < 4; x++) {
+                board.down(x);
             }
         }
 
         if (keyCode == 38) {
-            for (int col = 0; col < 4; col++) {
-                board.joinColumn(col);
+            for (int x = 0; x < 4; x++) {
+                board.up(x);
             }
         }
 
