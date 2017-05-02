@@ -2,35 +2,28 @@ package bartek;
 
 import org.junit.Test;
 
-import java.util.Arrays;
-
 import static org.junit.Assert.assertArrayEquals;
 
 public class BoardTest {
 
     private static Board setFields(int[][] fields) {
-        for (int i = 0; i < 4; i++) {
-            System.out.println(Arrays.toString(fields[i]));
-        }
         Board board = new Board();
         for (int y = 0; y < 4; y++) {
             for (int x = 0; x < 4; x++) {
                 board.setValue(x, y, fields[y][x]);
-                System.out.print(fields[y][x]);
             }
-            System.out.println();
         }
         return board;
     }
 
-    private int[][] fixArray(int[][] array) {
-        int[][] fixedArray = new int[4][4];
+    private int[][] rotateArrayToAssert(int[][] array) {
+        int[][] rotatedArray = new int[4][4];
         for (int y = 0; y < 4; y++) {
             for (int x = 0; x < 4; x++) {
-                fixedArray[x][y] = array[y][x];
+                rotatedArray[x][y] = array[y][x];
             }
         }
-        return fixedArray;
+        return rotatedArray;
     }
 
     @Test
@@ -54,7 +47,7 @@ public class BoardTest {
                         {0, 0, 0, 0},
                         {0, 0, 0, 0},
                         {2, 2, 2, 2}},
-                fixArray(board.getFields())
+                rotateArrayToAssert(board.getFields())
         );
     }
 
@@ -74,14 +67,13 @@ public class BoardTest {
             board.down(x);
         }
 
-        System.out.println(Arrays.deepToString(fixArray(board.getFields())));
         // then
         assertArrayEquals(new int[][]{
                         {0, 0, 0, 0},
                         {0, 0, 0, 0},
                         {0, 0, 0, 0},
                         {4, 0, 0, 0}},
-                fixArray(board.getFields())
+                rotateArrayToAssert(board.getFields())
         );
     }
 
@@ -108,7 +100,7 @@ public class BoardTest {
                         {0, 0, 0, 0},
                         {2, 0, 16, 0},
                         {4, 0, 32, 0}},
-                fixArray(board.getFields())
+                rotateArrayToAssert(board.getFields())
         );
     }
 
@@ -133,7 +125,7 @@ public class BoardTest {
                         {0, 0, 0, 0},
                         {4, 0, 0, 32},
                         {8, 0, 0, 128}},
-                fixArray(board.getFields())
+                rotateArrayToAssert(board.getFields())
         );
     }
 
@@ -159,7 +151,7 @@ public class BoardTest {
                         {0, 0, 0, 0},
                         {4, 8, 0, 0},
                         {4, 16, 0, 0}},
-                fixArray(board.getFields())
+                rotateArrayToAssert(board.getFields())
         );
     }
 
@@ -183,7 +175,7 @@ public class BoardTest {
                         {0, 0, 0, 0},
                         {2, 16, 0, 0},
                         {4, 32, 0, 0}},
-                fixArray(board.getFields())
+                rotateArrayToAssert(board.getFields())
         );
     }
 
@@ -208,7 +200,7 @@ public class BoardTest {
                         {0, 0, 0, 0},
                         {2, 0, 0, 4},
                         {4, 0, 0, 8}},
-                fixArray(board.getFields()));
+                rotateArrayToAssert(board.getFields()));
     }
 
     @Test
@@ -231,7 +223,7 @@ public class BoardTest {
                         {4, 0, 0, 0},
                         {8, 2, 0, 0},
                         {16, 4, 2, 2}},
-                fixArray(board.getFields())
+                rotateArrayToAssert(board.getFields())
         );
     }
 
@@ -257,7 +249,7 @@ public class BoardTest {
                         {0, 0, 0, 0},
                         {0, 0, 0, 0},
                         {0, 0, 0, 0}},
-                fixArray(board.getFields())
+                rotateArrayToAssert(board.getFields())
         );
     }
 
@@ -276,13 +268,12 @@ public class BoardTest {
         }
 
         // then
-        System.out.println(Arrays.deepToString(fixArray(board.getFields())));
         assertArrayEquals(new int[][]{
                         {4, 8, 16, 64},
                         {0, 0, 0, 0},
                         {0, 0, 0, 0},
                         {0, 0, 0, 0}},
-                fixArray(board.getFields())
+                rotateArrayToAssert(board.getFields())
         );
     }
 
@@ -308,7 +299,7 @@ public class BoardTest {
                         {2, 0, 16, 0},
                         {0, 0, 0, 0},
                         {0, 0, 0, 0}},
-                fixArray(board.getFields())
+                rotateArrayToAssert(board.getFields())
         );
     }
 
@@ -333,7 +324,7 @@ public class BoardTest {
                         {8, 0, 256, 0},
                         {0, 0, 0, 0},
                         {0, 0, 0, 0}},
-                fixArray(board.getFields())
+                rotateArrayToAssert(board.getFields())
         );
     }
 
@@ -359,7 +350,7 @@ public class BoardTest {
                         {4, 0, 0, 16},
                         {0, 0, 0, 0},
                         {0, 0, 0, 0}},
-                fixArray(board.getFields())
+                rotateArrayToAssert(board.getFields())
         );
     }
 
@@ -384,7 +375,7 @@ public class BoardTest {
                         {4, 32, 0, 0},
                         {0, 0, 0, 0},
                         {0, 0, 0, 0}},
-                fixArray(board.getFields())
+                rotateArrayToAssert(board.getFields())
         );
     }
 
@@ -410,7 +401,7 @@ public class BoardTest {
                         {4, 0, 0, 8},
                         {0, 0, 0, 0},
                         {0, 0, 0, 0}},
-                fixArray(board.getFields()));
+                rotateArrayToAssert(board.getFields()));
     }
 
     @Test
@@ -434,7 +425,7 @@ public class BoardTest {
                         {4, 4, 0, 0},
                         {8, 0, 0, 0},
                         {16, 0, 0, 0}},
-                fixArray(board.getFields())
+                rotateArrayToAssert(board.getFields())
         );
     }
 
