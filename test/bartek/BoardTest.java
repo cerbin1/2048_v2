@@ -6,7 +6,7 @@ import static org.junit.Assert.assertArrayEquals;
 
 public class BoardTest {
 
-    private static Board setFields(int[][] fields) {
+    private static Board setBoard(int[][] fields) {
         Board board = new Board();
         for (int y = 0; y < 4; y++) {
             for (int x = 0; x < 4; x++) {
@@ -16,14 +16,14 @@ public class BoardTest {
         return board;
     }
 
-    private int[][] rotateArrayToAssert(int[][] array) {
-        int[][] rotatedArray = new int[4][4];
+    private int[][] rotate(int[][] array) {
+        int[][] rotated = new int[4][4];
         for (int y = 0; y < 4; y++) {
             for (int x = 0; x < 4; x++) {
-                rotatedArray[x][y] = array[y][x];
+                rotated[x][y] = array[y][x];
             }
         }
-        return rotatedArray;
+        return rotated;
     }
 
     private void moveDown(Board board) {
@@ -41,8 +41,7 @@ public class BoardTest {
     @Test
     public void shouldMoveFieldsDown() {
         // given
-
-        Board board = setFields(new int[][]{
+        Board board = setBoard(new int[][]{
                 {2, 2, 2, 2},
                 {0, 0, 0, 0},
                 {0, 0, 0, 0},
@@ -57,17 +56,14 @@ public class BoardTest {
                         {0, 0, 0, 0},
                         {0, 0, 0, 0},
                         {2, 2, 2, 2}},
-                rotateArrayToAssert(board.getFields())
+                rotate(board.getFields())
         );
     }
-
 
     @Test
     public void shouldJoinTwoFieldsDown() {
         // given
-
-
-        Board board = setFields(new int[][]{
+        Board board = setBoard(new int[][]{
                 {2, 0, 0, 0},
                 {0, 0, 0, 0},
                 {2, 0, 0, 0},
@@ -82,16 +78,14 @@ public class BoardTest {
                         {0, 0, 0, 0},
                         {0, 0, 0, 0},
                         {4, 0, 0, 0}},
-                rotateArrayToAssert(board.getFields())
+                rotate(board.getFields())
         );
     }
 
     @Test
     public void shouldPreferFieldsOnBottomDown() {
         // given
-
-
-        Board board = setFields(new int[][]{
+        Board board = setBoard(new int[][]{
                 {2, 0, 16, 0},
                 {2, 0, 0, 0},
                 {2, 0, 16, 0},
@@ -106,16 +100,13 @@ public class BoardTest {
                         {0, 0, 0, 0},
                         {2, 0, 16, 0},
                         {4, 0, 32, 0}},
-                rotateArrayToAssert(board.getFields())
+                rotate(board.getFields())
         );
     }
 
-
     @Test
     public void shouldJoinFourFieldsInAColumnDown() {
-
-
-        Board board = setFields(new int[][]{
+        Board board = setBoard(new int[][]{
                 {2, 0, 0, 16},
                 {2, 0, 0, 16},
                 {4, 0, 0, 64},
@@ -130,15 +121,13 @@ public class BoardTest {
                         {0, 0, 0, 0},
                         {4, 0, 0, 32},
                         {8, 0, 0, 128}},
-                rotateArrayToAssert(board.getFields())
+                rotate(board.getFields())
         );
     }
 
     @Test
     public void shouldJoinFieldsAndStopOnFieldDown() {
-
-
-        Board board = setFields(new int[][]{
+        Board board = setBoard(new int[][]{
                 {2, 4, 0, 0},
                 {2, 0, 0, 0},
                 {4, 4, 0, 0},
@@ -153,15 +142,13 @@ public class BoardTest {
                         {0, 0, 0, 0},
                         {4, 8, 0, 0},
                         {4, 16, 0, 0}},
-                rotateArrayToAssert(board.getFields())
+                rotate(board.getFields())
         );
     }
 
     @Test
     public void shouldNotJoinDifferentFieldsDown() {
-
-
-        Board board = setFields(new int[][]{
+        Board board = setBoard(new int[][]{
                 {0, 0, 0, 0},
                 {0, 0, 0, 0},
                 {2, 16, 0, 0},
@@ -175,15 +162,14 @@ public class BoardTest {
                         {0, 0, 0, 0},
                         {2, 16, 0, 0},
                         {4, 32, 0, 0}},
-                rotateArrayToAssert(board.getFields())
+                rotate(board.getFields())
         );
     }
 
     @Test
     public void shouldMoveFieldsButNotJoinDown() {
         // given
-
-        Board board = setFields(new int[][]{
+        Board board = setBoard(new int[][]{
                 {2, 0, 0, 0},
                 {0, 0, 0, 4},
                 {4, 0, 0, 0},
@@ -198,13 +184,12 @@ public class BoardTest {
                         {0, 0, 0, 0},
                         {2, 0, 0, 4},
                         {4, 0, 0, 8}},
-                rotateArrayToAssert(board.getFields()));
+                rotate(board.getFields()));
     }
 
     @Test
     public void shouldNotMoveWhenNoSpaceAndFieldsToJoinDown() {
-
-        Board board = setFields(new int[][]{
+        Board board = setBoard(new int[][]{
                 {2, 0, 0, 0},
                 {4, 0, 0, 0},
                 {8, 2, 0, 0},
@@ -219,16 +204,14 @@ public class BoardTest {
                         {4, 0, 0, 0},
                         {8, 2, 0, 0},
                         {16, 4, 2, 2}},
-                rotateArrayToAssert(board.getFields())
+                rotate(board.getFields())
         );
     }
 
     @Test
     public void shouldMoveFieldsUp() {
         // given
-
-
-        Board board = setFields(new int[][]{
+        Board board = setBoard(new int[][]{
                 {0, 0, 0, 0},
                 {0, 0, 2, 0},
                 {0, 2, 0, 0},
@@ -243,14 +226,14 @@ public class BoardTest {
                         {0, 0, 0, 0},
                         {0, 0, 0, 0},
                         {0, 0, 0, 0}},
-                rotateArrayToAssert(board.getFields())
+                rotate(board.getFields())
         );
     }
 
     @Test
     public void shouldJoinTwoFieldsUp() {
         // given
-        Board board = setFields(new int[][]{
+        Board board = setBoard(new int[][]{
                 {0, 0, 8, 0},
                 {2, 0, 0, 32},
                 {0, 4, 0, 0},
@@ -265,16 +248,14 @@ public class BoardTest {
                         {0, 0, 0, 0},
                         {0, 0, 0, 0},
                         {0, 0, 0, 0}},
-                rotateArrayToAssert(board.getFields())
+                rotate(board.getFields())
         );
     }
 
     @Test
     public void shouldPreferFieldsOnTopUp() {
         // given
-
-
-        Board board = setFields(new int[][]{
+        Board board = setBoard(new int[][]{
                 {0, 0, 16, 0},
                 {2, 0, 16, 0},
                 {2, 0, 0, 0},
@@ -289,15 +270,13 @@ public class BoardTest {
                         {2, 0, 16, 0},
                         {0, 0, 0, 0},
                         {0, 0, 0, 0}},
-                rotateArrayToAssert(board.getFields())
+                rotate(board.getFields())
         );
     }
 
     @Test
     public void shouldJoinFourFieldsInAColumnUp() {
-
-
-        Board board = setFields(new int[][]{
+        Board board = setBoard(new int[][]{
                 {2, 0, 16, 0},
                 {2, 0, 16, 0},
                 {4, 0, 128, 0},
@@ -312,16 +291,13 @@ public class BoardTest {
                         {8, 0, 256, 0},
                         {0, 0, 0, 0},
                         {0, 0, 0, 0}},
-                rotateArrayToAssert(board.getFields())
+                rotate(board.getFields())
         );
     }
 
-
     @Test
     public void shouldJoinFieldsAndStopOnFieldUp() {
-
-
-        Board board = setFields(new int[][]{
+        Board board = setBoard(new int[][]{
                 {0, 0, 0, 16},
                 {32, 0, 0, 8},
                 {2, 0, 0, 0},
@@ -336,15 +312,13 @@ public class BoardTest {
                         {4, 0, 0, 16},
                         {0, 0, 0, 0},
                         {0, 0, 0, 0}},
-                rotateArrayToAssert(board.getFields())
+                rotate(board.getFields())
         );
     }
 
     @Test
     public void shouldNotJoinDifferentFieldsUp() {
-
-
-        Board board = setFields(new int[][]{
+        Board board = setBoard(new int[][]{
                 {2, 16, 0, 0},
                 {4, 32, 0, 0},
                 {0, 0, 0, 0},
@@ -359,16 +333,14 @@ public class BoardTest {
                         {4, 32, 0, 0},
                         {0, 0, 0, 0},
                         {0, 0, 0, 0}},
-                rotateArrayToAssert(board.getFields())
+                rotate(board.getFields())
         );
     }
 
     @Test
     public void shouldMoveFieldsButNotJoinUp() {
         // given
-
-
-        Board board = setFields(new int[][]{
+        Board board = setBoard(new int[][]{
                 {0, 0, 0, 0},
                 {2, 0, 0, 0},
                 {0, 0, 0, 4},
@@ -383,14 +355,12 @@ public class BoardTest {
                         {4, 0, 0, 8},
                         {0, 0, 0, 0},
                         {0, 0, 0, 0}},
-                rotateArrayToAssert(board.getFields()));
+                rotate(board.getFields()));
     }
 
     @Test
     public void shouldNotMoveWhenNoSpaceAndFieldsToJoinUp() {
-
-
-        Board board = setFields(new int[][]{
+        Board board = setBoard(new int[][]{
                 {2, 2, 2, 2},
                 {4, 4, 0, 0},
                 {8, 0, 0, 0},
@@ -405,9 +375,7 @@ public class BoardTest {
                         {4, 4, 0, 0},
                         {8, 0, 0, 0},
                         {16, 0, 0, 0}},
-                rotateArrayToAssert(board.getFields())
+                rotate(board.getFields())
         );
     }
-
-
 }
