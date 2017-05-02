@@ -92,6 +92,60 @@ public class RowTest {
     }
 
     @Test
+    public void shouldJoinTwoFields3() {
+        // given
+        Row row = new Row(2, 2, 0, 0);
+
+        // when
+        int[] after = row.joinAndMove();
+
+        // then
+        System.out.println(Arrays.toString(after));
+        assertArrayEquals(new int[]{4, 0, 0, 0},
+                after);
+    }
+    @Test
+    public void shouldJoinTwoFields4() {
+        // given
+        Row row = new Row(0, 2, 2, 0);
+
+        // when
+        int[] after = row.joinAndMove();
+
+        // then
+        System.out.println(Arrays.toString(after));
+        assertArrayEquals(new int[]{4, 0, 0, 0},
+                after);
+    }
+    @Test
+    public void shouldJoinTwoFields5() {
+        // given
+        Row row = new Row(0, 2, 0, 2);
+
+        // when
+        int[] after = row.joinAndMove();
+
+        // then
+        System.out.println(Arrays.toString(after));
+        assertArrayEquals(new int[]{4, 0, 0, 0},
+                after);
+    }
+
+    @Test
+    public void shouldJoinTwoFields6() {
+        // given
+        Row row = new Row(0, 0, 2, 2);
+
+        // when
+        int[] after = row.joinAndMove();
+
+        // then
+        System.out.println(Arrays.toString(after));
+        assertArrayEquals(new int[]{4, 0, 0, 0},
+                after);
+    }
+
+    @Test
     public void shouldJoinFourFields() {
         // given
         Row row = new Row(2, 2, 8, 8);
