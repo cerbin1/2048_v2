@@ -38,6 +38,18 @@ public class BoardTest {
         }
     }
 
+    private void moveLeft(Board board) {
+        for (int y = 0; y < 4; y++) {
+            board.left(y);
+        }
+    }
+
+    private void moveRight(Board board) {
+        for (int y = 0; y < 4; y++) {
+            board.right(y);
+        }
+    }
+
     @Test
     public void shouldMoveFieldsDown() {
         // given
@@ -375,6 +387,348 @@ public class BoardTest {
                         {4, 4, 0, 0},
                         {8, 0, 0, 0},
                         {16, 0, 0, 0}},
+                rotate(board.getFields())
+        );
+    }
+
+    @Test
+    public void shouldMoveFieldsLeft() {
+        // given
+        Board board = setBoard(new int[][]{
+                {0, 0, 0, 2},
+                {0, 0, 2, 0},
+                {0, 2, 0, 0},
+                {2, 0, 0, 0}});
+
+        // when
+        moveLeft(board);
+
+        // then
+        assertArrayEquals(new int[][]{
+                        {2, 0, 0, 0},
+                        {2, 0, 0, 0},
+                        {2, 0, 0, 0},
+                        {2, 0, 0, 0}},
+                rotate(board.getFields())
+        );
+    }
+
+    @Test
+    public void shouldJoinTwoFieldsLeft() {
+        // given
+        Board board = setBoard(new int[][]{
+                {0, 2, 0, 2},
+                {0, 4, 4, 0},
+                {0, 0, 8, 0},
+                {0, 32, 0, 32}});
+
+        // when
+        moveLeft(board);
+
+        // then
+        assertArrayEquals(new int[][]{
+                        {4, 0, 0, 0},
+                        {8, 0, 0, 0},
+                        {8, 0, 0, 0},
+                        {64, 0, 0, 0}},
+                rotate(board.getFields())
+        );
+    }
+
+    @Test
+    public void shouldPreferFieldsOnLeft() {
+        // given
+        Board board = setBoard(new int[][]{
+                {0, 2, 2, 2},
+                {0, 0, 0, 0},
+                {16, 16, 0, 16},
+                {0, 0, 0, 0}});
+
+        // when
+        moveLeft(board);
+
+        // then
+        assertArrayEquals(new int[][]{
+                        {4, 2, 0, 0},
+                        {0, 0, 0, 0},
+                        {32, 16, 0, 0},
+                        {0, 0, 0, 0}},
+                rotate(board.getFields())
+        );
+    }
+
+    @Test
+    public void shouldJoinFourFieldsInAColumnLeft() {
+        Board board = setBoard(new int[][]{
+                {2, 2, 4, 4},
+                {0, 0, 0, 0},
+                {16, 16, 128, 128},
+                {0, 0, 0, 0}});
+
+        // when
+        moveLeft(board);
+
+        // then
+        assertArrayEquals(new int[][]{
+                        {4, 8, 0, 0},
+                        {0, 0, 0, 0},
+                        {32, 256, 0, 0},
+                        {0, 0, 0, 0}},
+                rotate(board.getFields())
+        );
+    }
+
+    @Test
+    public void shouldJoinFieldsAndStopOnFieldLeft() {
+        Board board = setBoard(new int[][]{
+                {0, 32, 2, 2},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 16, 8, 8}});
+
+        // when
+        moveLeft(board);
+
+        // then
+        assertArrayEquals(new int[][]{
+                        {32, 4, 0, 0},
+                        {0, 0, 0, 0},
+                        {0, 0, 0, 0},
+                        {16, 16, 0, 0}},
+                rotate(board.getFields())
+        );
+    }
+
+    @Test
+    public void shouldNotJoinDifferentFieldsLeft() {
+        Board board = setBoard(new int[][]{
+                {2, 16, 0, 0},
+                {4, 32, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0}});
+
+        // when
+        moveLeft(board);
+
+        // then
+        assertArrayEquals(new int[][]{
+                        {2, 16, 0, 0},
+                        {4, 32, 0, 0},
+                        {0, 0, 0, 0},
+                        {0, 0, 0, 0}},
+                rotate(board.getFields())
+        );
+    }
+
+    @Test
+    public void shouldMoveFieldsButNotJoinLeft() {
+        // given
+        Board board = setBoard(new int[][]{
+                {0, 2, 0, 4},
+                {0, 0, 0, 0},
+                {0, 0, 4, 8},
+                {0, 0, 0, 0}});
+
+        // when
+        moveLeft(board);
+
+        // then
+        assertArrayEquals(new int[][]{
+                        {2, 4, 0, 0},
+                        {0, 0, 0, 0},
+                        {4, 8, 0, 0},
+                        {0, 0, 0, 0}},
+                rotate(board.getFields()));
+    }
+
+    @Test
+    public void shouldNotMoveWhenNoSpaceAndFieldsToJoinLeft() {
+        Board board = setBoard(new int[][]{
+                {2, 4, 16, 0},
+                {2, 8, 0, 0},
+                {2, 0, 0, 0},
+                {2, 0, 0, 0}});
+
+        // when
+        moveLeft(board);
+
+        // then
+        assertArrayEquals(new int[][]{
+                        {2, 4, 16, 0},
+                        {2, 8, 0, 0},
+                        {2, 0, 0, 0},
+                        {2, 0, 0, 0}},
+                rotate(board.getFields())
+        );
+    }
+
+    @Test
+    public void shouldMoveFieldsRight() {
+        // given
+        Board board = setBoard(new int[][]{
+                {0, 0, 0, 2},
+                {0, 0, 2, 0},
+                {0, 2, 0, 0},
+                {2, 0, 0, 0}});
+
+        // when
+        moveRight(board);
+
+        // then
+        assertArrayEquals(new int[][]{
+                        {0, 0, 0, 2},
+                        {0, 0, 0, 2},
+                        {0, 0, 0, 2},
+                        {0, 0, 0, 2}},
+                rotate(board.getFields())
+        );
+    }
+
+    @Test
+    public void shouldJoinTwoFieldsRight() {
+        // given
+        Board board = setBoard(new int[][]{
+                {0, 2, 0, 2},
+                {0, 4, 4, 0},
+                {0, 0, 8, 0},
+                {0, 32, 0, 32}});
+
+        // when
+        moveRight(board);
+
+        // then
+        assertArrayEquals(new int[][]{
+                        {0, 0, 0, 4},
+                        {0, 0, 0, 8},
+                        {0, 0, 0, 8},
+                        {0, 0, 0, 64}},
+                rotate(board.getFields())
+        );
+    }
+
+    @Test
+    public void shouldPreferFieldsOnRight() {
+        // given
+        Board board = setBoard(new int[][]{
+                {0, 2, 2, 2},
+                {0, 0, 0, 0},
+                {16, 16, 0, 16},
+                {0, 0, 0, 0}});
+
+        // when
+        moveRight(board);
+
+        // then
+        assertArrayEquals(new int[][]{
+                        {0, 0, 2, 4},
+                        {0, 0, 0, 0},
+                        {0, 0, 16, 32},
+                        {0, 0, 0, 0}},
+                rotate(board.getFields())
+        );
+    }
+
+    @Test
+    public void shouldJoinFourFieldsInAColumnRight() {
+        Board board = setBoard(new int[][]{
+                {2, 2, 4, 4},
+                {0, 0, 0, 0},
+                {16, 16, 128, 128},
+                {0, 0, 0, 0}});
+
+        // when
+        moveRight(board);
+
+        // then
+        assertArrayEquals(new int[][]{
+                        {0, 0, 4, 8},
+                        {0, 0, 0, 0},
+                        {0, 0, 32, 256},
+                        {0, 0, 0, 0}},
+                rotate(board.getFields())
+        );
+    }
+
+    @Test
+    public void shouldJoinFieldsAndStopOnFieldRight() {
+        Board board = setBoard(new int[][]{
+                {0, 2, 2, 32},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {8, 8, 16, 0}});
+
+        // when
+        moveRight(board);
+
+        // then
+        assertArrayEquals(new int[][]{
+                        {0, 0, 4, 32},
+                        {0, 0, 0, 0},
+                        {0, 0, 0, 0},
+                        {0, 0, 16, 16}},
+                rotate(board.getFields())
+        );
+    }
+
+    @Test
+    public void shouldNotJoinDifferentFieldsRight() {
+        Board board = setBoard(new int[][]{
+                {0, 0, 2, 16},
+                {0, 0, 4, 32},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0}});
+
+        // when
+        moveRight(board);
+
+        // then
+        assertArrayEquals(new int[][]{
+                        {0, 0, 2, 16},
+                        {0, 0, 4, 32},
+                        {0, 0, 0, 0},
+                        {0, 0, 0, 0}},
+                rotate(board.getFields())
+        );
+    }
+
+    @Test
+    public void shouldMoveFieldsButNotJoinRight() {
+        // given
+        Board board = setBoard(new int[][]{
+                {0, 2, 4, 0},
+                {0, 0, 0, 0},
+                {8, 4, 0, 0},
+                {0, 0, 0, 0}});
+
+        // when
+        moveRight(board);
+
+        // then
+        assertArrayEquals(new int[][]{
+                        {0, 0, 2, 4},
+                        {0, 0, 0, 0},
+                        {0, 0, 8, 4},
+                        {0, 0, 0, 0}},
+                rotate(board.getFields()));
+    }
+
+    @Test
+    public void shouldNotMoveWhenNoSpaceAndFieldsToJoinRight() {
+        Board board = setBoard(new int[][]{
+                {0, 16, 4, 2},
+                {0, 0, 8, 2},
+                {0, 0, 0, 2},
+                {0, 0, 0, 2}});
+
+        // when
+        moveRight(board);
+
+        // then
+        assertArrayEquals(new int[][]{
+                        {0, 16, 4, 2},
+                        {0, 0, 8, 2},
+                        {0, 0, 0, 2},
+                        {0, 0, 0, 2}},
                 rotate(board.getFields())
         );
     }
