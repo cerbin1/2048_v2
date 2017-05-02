@@ -26,6 +26,18 @@ public class BoardTest {
         return rotatedArray;
     }
 
+    private void moveDown(Board board) {
+        for (int x = 0; x < 4; x++) {
+            board.down(x);
+        }
+    }
+
+    private void moveUp(Board board) {
+        for (int x = 0; x < 4; x++) {
+            board.up(x);
+        }
+    }
+
     @Test
     public void shouldMoveFieldsDown() {
         // given
@@ -37,9 +49,7 @@ public class BoardTest {
                 {0, 0, 0, 0}});
 
         // when
-        for (int x = 0; x < 4; x++) {
-            board.down(x);
-        }
+        moveDown(board);
 
         // then
         assertArrayEquals(new int[][]{
@@ -50,6 +60,7 @@ public class BoardTest {
                 rotateArrayToAssert(board.getFields())
         );
     }
+
 
     @Test
     public void shouldJoinTwoFieldsDown() {
@@ -63,9 +74,7 @@ public class BoardTest {
                 {0, 0, 0, 0}});
 
         // when
-        for (int x = 0; x < 4; x++) {
-            board.down(x);
-        }
+        moveDown(board);
 
         // then
         assertArrayEquals(new int[][]{
@@ -76,7 +85,6 @@ public class BoardTest {
                 rotateArrayToAssert(board.getFields())
         );
     }
-
 
     @Test
     public void shouldPreferFieldsOnBottomDown() {
@@ -90,9 +98,7 @@ public class BoardTest {
                 {0, 0, 16, 0}});
 
         // when
-        for (int x = 0; x < 4; x++) {
-            board.down(x);
-        }
+        moveDown(board);
 
         // then
         assertArrayEquals(new int[][]{
@@ -103,6 +109,7 @@ public class BoardTest {
                 rotateArrayToAssert(board.getFields())
         );
     }
+
 
     @Test
     public void shouldJoinFourFieldsInAColumnDown() {
@@ -115,9 +122,7 @@ public class BoardTest {
                 {4, 0, 0, 64}});
 
         // when
-        for (int x = 0; x < 4; x++) {
-            board.down(x);
-        }
+        moveDown(board);
 
         // then
         assertArrayEquals(new int[][]{
@@ -128,7 +133,6 @@ public class BoardTest {
                 rotateArrayToAssert(board.getFields())
         );
     }
-
 
     @Test
     public void shouldJoinFieldsAndStopOnFieldDown() {
@@ -141,9 +145,7 @@ public class BoardTest {
                 {0, 16, 0, 0}});
 
         // when
-        for (int x = 0; x < 4; x++) {
-            board.down(x);
-        }
+        moveDown(board);
 
         // then
         assertArrayEquals(new int[][]{
@@ -165,9 +167,7 @@ public class BoardTest {
                 {2, 16, 0, 0},
                 {4, 32, 0, 0}});
         // when
-        for (int x = 0; x < 4; x++) {
-            board.down(x);
-        }
+        moveDown(board);
 
         // then
         assertArrayEquals(new int[][]{
@@ -190,9 +190,7 @@ public class BoardTest {
                 {0, 0, 0, 8}});
 
         // when
-        for (int x = 0; x < 4; x++) {
-            board.down(x);
-        }
+        moveDown(board);
 
         // then
         assertArrayEquals(new int[][]{
@@ -213,9 +211,7 @@ public class BoardTest {
                 {16, 4, 2, 2}});
 
         // when
-        for (int x = 0; x < 4; x++) {
-            board.down(x);
-        }
+        moveDown(board);
 
         // then
         assertArrayEquals(new int[][]{
@@ -239,9 +235,7 @@ public class BoardTest {
                 {2, 0, 0, 2}});
 
         // when
-        for (int x = 0; x < 4; x++) {
-            board.up(x);
-        }
+        moveUp(board);
 
         // then
         assertArrayEquals(new int[][]{
@@ -263,9 +257,7 @@ public class BoardTest {
                 {2, 4, 8, 32}});
 
         // when
-        for (int x = 0; x < 4; x++) {
-            board.up(x);
-        }
+        moveUp(board);
 
         // then
         assertArrayEquals(new int[][]{
@@ -289,9 +281,7 @@ public class BoardTest {
                 {2, 0, 16, 0}});
 
         // when
-        for (int x = 0; x < 4; x++) {
-            board.up(x);
-        }
+        moveUp(board);
 
         // then
         assertArrayEquals(new int[][]{
@@ -314,9 +304,7 @@ public class BoardTest {
                 {4, 0, 128, 0}});
 
         // when
-        for (int x = 0; x < 4; x++) {
-            board.up(x);
-        }
+        moveUp(board);
 
         // then
         assertArrayEquals(new int[][]{
@@ -340,9 +328,7 @@ public class BoardTest {
                 {2, 0, 0, 8}});
 
         // when
-        for (int x = 0; x < 4; x++) {
-            board.up(x);
-        }
+        moveUp(board);
 
         // then
         assertArrayEquals(new int[][]{
@@ -365,9 +351,7 @@ public class BoardTest {
                 {0, 0, 0, 0}});
 
         // when
-        for (int x = 0; x < 4; x++) {
-            board.up(x);
-        }
+        moveUp(board);
 
         // then
         assertArrayEquals(new int[][]{
@@ -391,9 +375,7 @@ public class BoardTest {
                 {4, 0, 0, 8}});
 
         // when
-        for (int x = 0; x < 4; x++) {
-            board.up(x);
-        }
+        moveUp(board);
 
         // then
         assertArrayEquals(new int[][]{
@@ -415,9 +397,7 @@ public class BoardTest {
                 {16, 0, 0, 0}});
 
         // when
-        for (int x = 0; x < 4; x++) {
-            board.up(x);
-        }
+        moveUp(board);
 
         // then
         assertArrayEquals(new int[][]{
