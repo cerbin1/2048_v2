@@ -36,4 +36,21 @@ public class Board {
         fields[x][1] = array[2];
         fields[x][0] = array[3];
     }
+
+    public void left(int y) {
+        Row row = new Row(fields[0][y], fields[1][y], fields[2][y], fields[3][y]);
+        int[] array = row.joinAndMove();
+        for (int i = 0; i < 4; i++) {
+            fields[i][y] = array[i];
+        }
+    }
+
+    public void right(int y) {
+        Row row = new Row(fields[3][y], fields[2][y], fields[1][y], fields[0][y]);
+        int[] array = row.joinAndMove();
+        fields[3][y] = array[0];
+        fields[2][y] = array[1];
+        fields[1][y] = array[2];
+        fields[0][y] = array[3];
+    }
 }

@@ -87,6 +87,18 @@ public class Application {
             }
         }
 
+        if (keyCode == 37) {
+            for (int y = 0; y < 4; y++) {
+                board.left(y);
+            }
+        }
+
+        if (keyCode == 39) {
+            for (int y = 0; y < 4; y++) {
+                board.right(y);
+            }
+        }
+
         displayFields(getFields());
         updateJButtons();
     }
