@@ -1,38 +1,18 @@
 package bartek;
 
-import bartek.direction.Down;
-import bartek.direction.Left;
-import bartek.direction.Right;
-import bartek.direction.Up;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Random;
 
 public class Application {
-    private Tile[][] tiles = new Tile[4][4];
-    private JFrame frame = new JFrame("1024");
-    private final Board board;
+    private final JFrame frame = new JFrame("1024");
+    private final Tile[][] tiles = new Tile[4][4];
+    private final Game game;
 
-    public Application(Board board) {
-        this.board = board;
+    public Application() {
+        game = new Game();
         initializeTiles();
-    }
-
-    private void setNewField() {
-        Random random = new Random();
-        if (board.getEmptyFields() != 0) {
-            while (true) {
-                int randomX = random.nextInt(4);
-                int randomY = random.nextInt(4);
-                if (board.getFields()[randomX][randomY] == 0) {
-                    board.getFields()[randomX][randomY] = 2;
-                    break;
-                }
-            }
-        }
     }
 
     public void displayFrame() {
@@ -40,8 +20,6 @@ public class Application {
         frame.setLocationRelativeTo(null);
         frame.setLayout(new GridLayout(4, 4));
         frame.addKeyListener(keyListener());
-        setNewField();
-        setNewField();
 
         updateJButtons();
 
@@ -59,8 +37,8 @@ public class Application {
 
             @Override
             public void keyPressed(KeyEvent e) {
-                move(e.getKeyCode());
-                setNewField();
+                game.move(e.getKeyCode());
+                updateJButtons();
             }
 
             @Override
@@ -86,40 +64,24 @@ public class Application {
         return jButton;
     }
 
-    public void move(int keyCode) {
-        Direction direction = null;
-        if (keyCode == KeyEvent.VK_DOWN) {
-            direction = new Down();
-        }
-
-        if (keyCode == KeyEvent.VK_UP) {
-            direction = new Up();
-        }
-
-        if (keyCode == KeyEvent.VK_LEFT) {
-            direction = new Left();
-        }
-
-        if (keyCode == KeyEvent.VK_RIGHT) {
-            direction = new Right();
-        }
-
-        if (direction != null) {
-            direction.move(board);
-        }
-
-        updateJButtons();
-    }
 
     private void updateJButtons() {
         for (int y = 0; y < 4; y++) {
             for (int x = 0; x < 4; x++) {
-                tiles[x][y].setText(Integer.toString(board.getFields()[x][y]));
+                setTextField(y, x);
             }
         }
     }
 
+    private void setTextField(int y, int x) {
+        tiles[x][y].setText(Integer.toString(getField(x, y)));
+    }
+
+    private int getField(int x, int y) {
+        return game.getBoard().getFields()[x][y];
+    }
+
     public static void main(String[] args) {
-        new Application(new Board()).displayFrame();
+        new Application().displayFrame();
     }
 }
