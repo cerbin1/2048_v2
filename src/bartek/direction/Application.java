@@ -1,4 +1,8 @@
-package bartek;
+package bartek.direction;
+
+import bartek.Board;
+import bartek.Direction;
+import bartek.Tile;
 
 import javax.swing.*;
 import java.awt.*;
@@ -74,30 +78,27 @@ public class Application {
     }
 
     public void move(int keyCode) {
-        System.out.println(keyCode);
-        if (keyCode == 40) {
-            for (int x = 0; x < 4; x++) {
-                board.down(x);
-            }
+        Direction direction = null;
+        if (keyCode == KeyEvent.VK_DOWN) {
+            direction = new Down();
         }
 
-        if (keyCode == 38) {
-            for (int x = 0; x < 4; x++) {
-                board.up(x);
-            }
+        if (keyCode == KeyEvent.VK_UP) {
+            direction = new Up();
         }
 
-        if (keyCode == 37) {
-            for (int y = 0; y < 4; y++) {
-                board.left(y);
-            }
+        if (keyCode == KeyEvent.VK_LEFT) {
+            direction = new Left();
         }
 
-        if (keyCode == 39) {
-            for (int y = 0; y < 4; y++) {
-                board.right(y);
-            }
+        if (keyCode == KeyEvent.VK_RIGHT) {
+            direction = new Right();
         }
+
+        if (direction != null) {
+            direction.move(board);
+        }
+
 
         displayFields(getFields());
         updateJButtons();
