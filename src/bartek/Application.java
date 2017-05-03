@@ -1,8 +1,9 @@
-package bartek.direction;
+package bartek;
 
-import bartek.Board;
-import bartek.Direction;
-import bartek.Tile;
+import bartek.direction.Down;
+import bartek.direction.Left;
+import bartek.direction.Right;
+import bartek.direction.Up;
 
 import javax.swing.*;
 import java.awt.*;
