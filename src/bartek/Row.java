@@ -2,6 +2,7 @@ package bartek;
 
 public class Row {
     private final int[] row;
+    private int points;
 
     public Row(int one, int two, int three, int four) {
         this.row = new int[]{one, two, three, four};
@@ -44,9 +45,14 @@ public class Row {
     private void joinWithNext(int i) {
         row[i] += row[i + 1];
         row[i + 1] = 0;
+        points += row[i];
     }
 
     public void revertValues() {
         ArrayHelper.revertValues(row);
+    }
+
+    int getPoints() {
+        return points;
     }
 }

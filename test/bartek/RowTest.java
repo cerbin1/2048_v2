@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 public class RowTest {
     @Test
@@ -104,6 +105,7 @@ public class RowTest {
         assertArrayEquals(new int[]{4, 0, 0, 0},
                 after);
     }
+
     @Test
     public void shouldJoinTwoFields4() {
         // given
@@ -117,6 +119,7 @@ public class RowTest {
         assertArrayEquals(new int[]{4, 0, 0, 0},
                 after);
     }
+
     @Test
     public void shouldJoinTwoFields5() {
         // given
@@ -325,5 +328,41 @@ public class RowTest {
         System.out.println(Arrays.toString(after));
         assertArrayEquals(new int[]{4, 8, 0, 0},
                 after);
+    }
+
+    @Test
+    public void shouldAddPoints() {
+        // given
+        Row row = new Row(2, 2, 0, 0);
+
+        // when
+        row.joinAndMove();
+
+        // then
+        assertEquals(4, row.getPoints());
+    }
+
+    @Test
+    public void shouldAddPointsFromDoubleJoining() {
+        // given
+        Row row = new Row(4, 4, 32, 32);
+
+        // when
+        row.joinAndMove();
+
+        // then
+        assertEquals(72, row.getPoints());
+    }
+
+    @Test
+    public void shouldNotAddPoints() {
+        // given
+        Row row = new Row(2, 4, 8, 16);
+
+        // when
+        row.joinAndMove();
+
+        // then
+        assertEquals(0, row.getPoints());
     }
 }
