@@ -45,4 +45,13 @@ public class Row {
         row[i] += row[i + 1];
         row[i + 1] = 0;
     }
+
+    public void revertValues() {
+
+        for (int i = 0; i < row.length / 2; i++) {
+            int temp = row[i];
+            row[i] = row[row.length - i - 1];
+            row[row.length - i - 1] = temp;
+        }
+    }
 }
