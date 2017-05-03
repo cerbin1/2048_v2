@@ -103,18 +103,7 @@ public class Application {
             direction.move(board);
         }
 
-
-        displayFields(getFields());
         updateJButtons();
-    }
-
-    private void displayFields(int[][] array) {
-        for (int y = 0; y < 4; y++) {
-            for (int x = 0; x < 4; x++) {
-                System.out.print(array[x][y] + " ");
-            }
-            System.out.println();
-        }
     }
 
     private void updateJButtons() {
