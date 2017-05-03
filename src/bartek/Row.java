@@ -47,11 +47,6 @@ public class Row {
     }
 
     public void revertValues() {
-
-        for (int i = 0; i < row.length / 2; i++) {
-            int temp = row[i];
-            row[i] = row[row.length - i - 1];
-            row[row.length - i - 1] = temp;
-        }
+        ArrayHelper.revertValues(row);
     }
 }

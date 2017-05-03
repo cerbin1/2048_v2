@@ -1,5 +1,7 @@
 package bartek;
 
+import static bartek.ArrayHelper.*;
+
 public class Board {
     private final int[][] fields;
 
@@ -29,7 +31,7 @@ public class Board {
         for (int x = 0; x < 4; x++) {
             Row row = getVerticalRow(x);
             row.revertValues();
-            int[] array = revertArray(row.joinAndMove());
+            int[] array = revertValues(row.joinAndMove());
             for (int y = 0; y < 4; y++) {
                 fields[x][y] = array[y];
             }
@@ -54,7 +56,7 @@ public class Board {
         for (int y = 0; y < 4; y++) {
             Row row = getHorizontalRow(y);
             row.revertValues();
-            int[] array = revertArray(row.joinAndMove());
+            int[] array = revertValues(row.joinAndMove());
             for (int x = 0; x < 4; x++) {
                 fields[x][y] = array[x];
             }
@@ -63,14 +65,5 @@ public class Board {
 
     private Row getHorizontalRow(int y) {
         return new Row(fields[0][y], fields[1][y], fields[2][y], fields[3][y]);
-    }
-
-    private int[] revertArray(int[] array) {
-        for (int i = 0; i < array.length / 2; i++) {
-            int temp = array[i];
-            array[i] = array[array.length - i - 1];
-            array[array.length - i - 1] = temp;
-        }
-        return array;
     }
 }
