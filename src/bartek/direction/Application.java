@@ -20,24 +20,27 @@ public class Application {
         initializeTiles();
     }
 
-    private void initializeFewFields() {
+    private void setNewField() {
         Random random = new Random();
-        for (int i = 0; i < 50; i++) {
-            getFields()[random.nextInt(4)][random.nextInt(4)] = 2;
+        if (board.getEmptyFields() != 0) {
+            while (true) {
+                int randomX = random.nextInt(4);
+                int randomY = random.nextInt(4);
+                if (board.getFields()[randomX][randomY] == 0) {
+                    board.getFields()[randomX][randomY] = 2;
+                    break;
+                }
+            }
         }
     }
-
-    int[][] getFields() {
-        return board.getFields();
-    }
-
 
     public void displayFrame() {
         frame.setSize(200, 200);
         frame.setLocationRelativeTo(null);
         frame.setLayout(new GridLayout(4, 4));
         frame.addKeyListener(keyListener());
-        initializeFewFields();
+        setNewField();
+        setNewField();
 
         updateJButtons();
 
@@ -56,6 +59,7 @@ public class Application {
             @Override
             public void keyPressed(KeyEvent e) {
                 move(e.getKeyCode());
+                setNewField();
             }
 
             @Override
@@ -109,7 +113,7 @@ public class Application {
     private void updateJButtons() {
         for (int y = 0; y < 4; y++) {
             for (int x = 0; x < 4; x++) {
-                tiles[x][y].setText(Integer.toString(getFields()[x][y]));
+                tiles[x][y].setText(Integer.toString(board.getFields()[x][y]));
             }
         }
     }

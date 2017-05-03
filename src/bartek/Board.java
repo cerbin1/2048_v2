@@ -66,4 +66,16 @@ public class Board {
     private Row getHorizontalRow(int y) {
         return new Row(fields[0][y], fields[1][y], fields[2][y], fields[3][y]);
     }
+
+    public int getEmptyFields() {
+        int emptyFields = 0;
+        for (int y = 0; y < 4; y++) {
+            for (int x = 0; x < 4; x++) {
+                if(fields[x][y] == 0) {
+                    emptyFields++;
+                }
+            }
+        }
+        return emptyFields;
+    }
 }
