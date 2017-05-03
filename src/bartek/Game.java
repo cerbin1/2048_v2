@@ -19,7 +19,7 @@ public class Game {
 
     private void setNewField() {
         Random random = new Random();
-        if (board.getEmptyFields() != 0) {
+        if (board.getEmptyFieldsCount() != 0) {
             while (true) {
                 int randomX = random.nextInt(4);
                 int randomY = random.nextInt(4);

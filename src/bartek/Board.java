@@ -67,7 +67,7 @@ public class Board {
         return new Row(fields[0][y], fields[1][y], fields[2][y], fields[3][y]);
     }
 
-    public int getEmptyFields() {
+    public int getEmptyFieldsCount() {
         int emptyFields = 0;
         for (int y = 0; y < 4; y++) {
             for (int x = 0; x < 4; x++) {
