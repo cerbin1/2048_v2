@@ -27,27 +27,19 @@ public class BoardTest {
     }
 
     private void moveDown(Board board) {
-        for (int x = 0; x < 4; x++) {
-            board.down(x);
-        }
+        board.down();
     }
 
     private void moveUp(Board board) {
-        for (int x = 0; x < 4; x++) {
-            board.up(x);
-        }
+        board.up();
     }
 
     private void moveLeft(Board board) {
-        for (int y = 0; y < 4; y++) {
-            board.left(y);
-        }
+        board.left();
     }
 
     private void moveRight(Board board) {
-        for (int y = 0; y < 4; y++) {
-            board.right(y);
-        }
+        board.right();
     }
 
     @Test
