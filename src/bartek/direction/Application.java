@@ -36,7 +36,18 @@ public class Application {
         frame.setSize(200, 200);
         frame.setLocationRelativeTo(null);
         frame.setLayout(new GridLayout(4, 4));
-        frame.addKeyListener(new KeyListener() {
+        frame.addKeyListener(keyListener());
+        initializeFewFields();
+
+        updateJButtons();
+
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+        frame.pack();
+    }
+
+    private KeyListener keyListener() {
+        return new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
 
@@ -51,14 +62,7 @@ public class Application {
             public void keyReleased(KeyEvent e) {
 
             }
-        });
-        initializeFewFields();
-
-        updateJButtons();
-
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-        frame.pack();
+        };
     }
 
     public void initializeTiles() {
