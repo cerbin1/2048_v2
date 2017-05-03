@@ -27,19 +27,19 @@ public class BoardTest {
     }
 
     private void moveDown(Board board) {
-        board.down();
+        board.moveFieldsDown();
     }
 
     private void moveUp(Board board) {
-        board.up();
+        board.moveFieldsUp();
     }
 
     private void moveLeft(Board board) {
-        board.left();
+        board.moveFieldsLeft();
     }
 
     private void moveRight(Board board) {
-        board.right();
+        board.moveFieldsRight();
     }
 
     @Test

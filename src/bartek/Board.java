@@ -20,7 +20,7 @@ public class Board {
         return fields;
     }
 
-    public void up() {
+    public void moveFieldsUp() {
         for (int x = 0; x < 4; x++) {
             Row row = new Row(fields[x][0], fields[x][1], fields[x][2], fields[x][3]);
             int[] array = row.joinAndMove();
@@ -30,7 +30,7 @@ public class Board {
         }
     }
 
-    public void down() {
+    public void moveFieldsDown() {
         for (int x = 0; x < 4; x++) {
             Row row = new Row(fields[x][3], fields[x][2], fields[x][1], fields[x][0]);
             int[] array = revertArray(row.joinAndMove());
@@ -40,7 +40,7 @@ public class Board {
         }
     }
 
-    public void left() {
+    public void moveFieldsLeft() {
         for (int y = 0; y < 4; y++) {
             Row row = new Row(fields[0][y], fields[1][y], fields[2][y], fields[3][y]);
             int[] array = row.joinAndMove();
@@ -51,7 +51,7 @@ public class Board {
 
     }
 
-    public void right() {
+    public void moveFieldsRight() {
         for (int y = 0; y < 4; y++) {
             Row row = new Row(fields[3][y], fields[2][y], fields[1][y], fields[0][y]);
             int[] array = revertArray(row.joinAndMove());

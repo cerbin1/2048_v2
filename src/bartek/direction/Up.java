@@ -6,6 +6,6 @@ import bartek.Direction;
 public class Up extends Direction {
     @Override
     public void move(Board board) {
-        board.up();
+        board.moveFieldsUp();
     }
 }
