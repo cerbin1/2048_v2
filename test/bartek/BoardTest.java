@@ -768,6 +768,5 @@ public class BoardTest {
 
         // then
         assertEquals(0, result);
-
     }
 }
