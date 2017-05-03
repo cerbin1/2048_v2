@@ -3,6 +3,7 @@ package bartek;
 import org.junit.Test;
 
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 public class BoardTest {
 
@@ -723,5 +724,50 @@ public class BoardTest {
                         {0, 0, 0, 2}},
                 rotate(board.getFields())
         );
+    }
+
+    @Test
+    public void shouldReturnNoFieldsEmpty() {
+        // given
+        Board board = new Board();
+
+        // when
+        int result = board.getEmptyFieldsCount();
+
+        // then
+        assertEquals(16, result);
+    }
+
+    @Test
+    public void shouldCountEmptyFieldsProperly() {
+        // given
+        Board board = setBoard(new int[][]{
+                {0, 16, 4, 2},
+                {0, 0, 8, 2},
+                {0, 2, 0, 2},
+                {2, 0, 0, 2}});
+
+        // when
+        int result = board.getEmptyFieldsCount();
+
+        // then
+        assertEquals(7, result);
+    }
+
+    @Test
+    public void shouldReturnZeroEmptyFields() {
+        // given
+        Board board = setBoard(new int[][]{
+                {2, 16, 4, 2},
+                {2, 2, 8, 2},
+                {2, 2, 2, 2},
+                {2, 2, 2, 2}});
+
+        // when
+        int result = board.getEmptyFieldsCount();
+
+        // then
+        assertEquals(0, result);
+
     }
 }
