@@ -11,9 +11,9 @@ import java.awt.event.KeyListener;
 import java.util.Random;
 
 public class Application {
-    Tile[][] tiles = new Tile[4][4];
-    JFrame frame = new JFrame("1024");
-    final Board board;
+    private Tile[][] tiles = new Tile[4][4];
+    private JFrame frame = new JFrame("1024");
+    private final Board board;
 
     public Application(Board board) {
         this.board = board;
