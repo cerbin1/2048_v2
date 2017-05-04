@@ -11,6 +11,7 @@ import java.util.Random;
 public class Game {
     private final Board board;
     private final PointsCounter pointsCounter = new PointsCounter();
+    private static final Random random = new Random();
 
     public Game() {
         board = new Board(pointsCounter);
@@ -19,17 +20,24 @@ public class Game {
     }
 
     private void setNewField() {
-        Random random = new Random();
-        if (board.getEmptyFieldsCount() != 0) {
-            while (true) {
-                int randomX = random.nextInt(4);
-                int randomY = random.nextInt(4);
-                if (board.getFields()[randomX][randomY] == 0) {
-                    board.getFields()[randomX][randomY] = 2;
-                    break;
-                }
+        if (canAddNewField()) {
+            addNewField();
+        }
+    }
+
+    private void addNewField() {
+        while (true) {
+            int randomX = random.nextInt(4);
+            int randomY = random.nextInt(4);
+            if (board.getFields()[randomX][randomY] == 0) {
+                board.getFields()[randomX][randomY] = 2;
+                break;
             }
         }
+    }
+
+    private boolean canAddNewField() {
+        return board.countEmptyFields() != 0;
     }
 
     public void move(int keyCode) {

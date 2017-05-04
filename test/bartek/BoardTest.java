@@ -732,7 +732,7 @@ public class BoardTest {
         Board board = new Board(new PointsCounter());
 
         // when
-        int result = board.getEmptyFieldsCount();
+        int result = board.countEmptyFields();
 
         // then
         assertEquals(16, result);
@@ -748,7 +748,7 @@ public class BoardTest {
                 {2, 0, 0, 2}});
 
         // when
-        int result = board.getEmptyFieldsCount();
+        int result = board.countEmptyFields();
 
         // then
         assertEquals(7, result);
@@ -764,7 +764,7 @@ public class BoardTest {
                 {2, 2, 2, 2}});
 
         // when
-        int result = board.getEmptyFieldsCount();
+        int result = board.countEmptyFields();
 
         // then
         assertEquals(0, result);

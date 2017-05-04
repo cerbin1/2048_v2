@@ -6,11 +6,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import static javax.swing.BoxLayout.Y_AXIS;
+import static javax.swing.WindowConstants.*;
 
 public class Application {
     private final JFrame frame = new JFrame("1024");
+    private final JLabel labelPoints = new JLabel();
     private final Tile[][] tiles = new Tile[4][4];
-    private final JLabel points = new JLabel();
+
     private final Game game;
 
     private Application() {
@@ -21,26 +23,27 @@ public class Application {
     private void addComponentsToContainer(Container container) {
         container.setLayout(new BoxLayout(container, Y_AXIS));
 
-        createGraphicInterface(container);
-        initializeTiles(container);
+        createUserInterface(container);
+        createGameBoard(container);
     }
 
-    private void createGraphicInterface(Container container) {
-        JPanel panel = new JPanel();
-        panel.setSize(400, 300);
-        points.setSize(400, 300);
+    private void createUserInterface(Container container) {
+        JPanel userInterface = new JPanel();
+        userInterface.setSize(400, 300);
+        labelPoints.setSize(400, 300);
         updatePoints(game.getPoints());
-        panel.add(points);
-        container.add(panel);
+        userInterface.add(labelPoints);
+        container.add(userInterface);
     }
 
 
     private void displayFrame() {
         frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
         frame.addKeyListener(keyListener());
         updateJButtons();
 
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setVisible(true);
         frame.pack();
     }
@@ -67,10 +70,10 @@ public class Application {
     }
 
     private void updatePoints(int points) {
-        this.points.setText(Integer.toString(points));
+        this.labelPoints.setText(Integer.toString(points));
     }
 
-    private void initializeTiles(Container container) {
+    private void createGameBoard(Container container) {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(4, 4));
         panel.setSize(400, 100);

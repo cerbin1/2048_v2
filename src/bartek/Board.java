@@ -77,7 +77,7 @@ public class Board {
         pointsCounter.addPoints(points);
     }
 
-    public int getEmptyFieldsCount() {
+    public int countEmptyFields() {
         int emptyFields = 0;
         for (int y = 0; y < 4; y++) {
             for (int x = 0; x < 4; x++) {
