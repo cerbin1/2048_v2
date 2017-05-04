@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 public class BoardTest {
 
     private static Board setBoard(int[][] fields) {
-        Board board = new Board(new PointsCounter());
+        BoardTestHelper board = new BoardTestHelper(new PointsCounter());
         for (int y = 0; y < 4; y++) {
             for (int x = 0; x < 4; x++) {
                 board.setValue(x, y, fields[y][x]);

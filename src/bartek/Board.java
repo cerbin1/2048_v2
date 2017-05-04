@@ -11,10 +11,6 @@ public class Board {
         fields = new int[4][4];
     }
 
-    public void setValue(int x, int y, int value) {
-        fields[x][y] = value;
-    }
-
     public int[][] getFields() {
         return fields;
     }
