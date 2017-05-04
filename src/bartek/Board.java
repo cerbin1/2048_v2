@@ -1,11 +1,13 @@
 package bartek;
 
-import static bartek.ArrayHelper.*;
+import static bartek.ArrayHelper.revertValues;
 
 public class Board {
     private final int[][] fields;
+    private PointsCounter pointsCounter;
 
-    public Board() {
+    public Board(PointsCounter pointsCounter) {
+        this.pointsCounter = pointsCounter;
         fields = new int[4][4];
     }
 
@@ -21,6 +23,7 @@ public class Board {
         for (int x = 0; x < 4; x++) {
             Row row = getVerticalRow(x);
             int[] array = row.joinAndMove();
+            addPoints(row.getPoints());
             for (int y = 0; y < 4; y++) {
                 fields[x][y] = array[y];
             }
@@ -32,6 +35,7 @@ public class Board {
             Row row = getVerticalRow(x);
             row.revertValues();
             int[] array = revertValues(row.joinAndMove());
+            addPoints(row.getPoints());
             for (int y = 0; y < 4; y++) {
                 fields[x][y] = array[y];
             }
@@ -46,6 +50,7 @@ public class Board {
         for (int y = 0; y < 4; y++) {
             Row row = getHorizontalRow(y);
             int[] array = row.joinAndMove();
+            addPoints(row.getPoints());
             for (int x = 0; x < 4; x++) {
                 fields[x][y] = array[x];
             }
@@ -57,6 +62,7 @@ public class Board {
             Row row = getHorizontalRow(y);
             row.revertValues();
             int[] array = revertValues(row.joinAndMove());
+            addPoints(row.getPoints());
             for (int x = 0; x < 4; x++) {
                 fields[x][y] = array[x];
             }
@@ -67,11 +73,15 @@ public class Board {
         return new Row(fields[0][y], fields[1][y], fields[2][y], fields[3][y]);
     }
 
+    private void addPoints(int points) {
+        pointsCounter.addPoints(points);
+    }
+
     public int getEmptyFieldsCount() {
         int emptyFields = 0;
         for (int y = 0; y < 4; y++) {
             for (int x = 0; x < 4; x++) {
-                if(fields[x][y] == 0) {
+                if (fields[x][y] == 0) {
                     emptyFields++;
                 }
             }

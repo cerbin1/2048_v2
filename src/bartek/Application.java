@@ -10,6 +10,7 @@ import static javax.swing.BoxLayout.Y_AXIS;
 public class Application {
     private final JFrame frame = new JFrame("1024");
     private final Tile[][] tiles = new Tile[4][4];
+    private final JLabel points = new JLabel();
     private final Game game;
 
     private Application() {
@@ -27,10 +28,9 @@ public class Application {
     private void createGraphicInterface(Container container) {
         JPanel panel = new JPanel();
         panel.setSize(400, 300);
-        JLabel label = new JLabel();
-        label.setSize(400, 300);
-        label.setText("Start New Game");
-        panel.add(label);
+        points.setSize(400, 300);
+        points.setText("Start New Game");
+        panel.add(points);
         container.add(panel);
     }
 
@@ -55,6 +55,7 @@ public class Application {
             @Override
             public void keyPressed(KeyEvent e) {
                 game.move(e.getKeyCode());
+                updatePoints(game.getPoints());
                 updateJButtons();
             }
 
@@ -63,6 +64,10 @@ public class Application {
 
             }
         };
+    }
+
+    private void updatePoints(int points) {
+        this.points.setText(Integer.toString(points));
     }
 
     private void initializeTiles(Container container) {

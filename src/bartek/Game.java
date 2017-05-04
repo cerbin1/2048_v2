@@ -10,9 +10,10 @@ import java.util.Random;
 
 public class Game {
     private final Board board;
+    private final PointsCounter pointsCounter = new PointsCounter();
 
     public Game() {
-        board = new Board();
+        board = new Board(pointsCounter);
         setNewField();
         setNewField();
     }
@@ -57,5 +58,9 @@ public class Game {
 
     public Board getBoard() {
         return board;
+    }
+
+    public int getPoints() {
+        return pointsCounter.getPoints();
     }
 }
