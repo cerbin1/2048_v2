@@ -5,22 +5,39 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import static javax.swing.BoxLayout.Y_AXIS;
+
 public class Application {
     private final JFrame frame = new JFrame("1024");
     private final Tile[][] tiles = new Tile[4][4];
     private final Game game;
 
-    public Application() {
+    private Application() {
+        addComponentsToContainer(frame.getContentPane());
         game = new Game();
-        initializeTiles();
     }
 
-    public void displayFrame() {
-        frame.setSize(200, 200);
-        frame.setLocationRelativeTo(null);
-        frame.setLayout(new GridLayout(4, 4));
-        frame.addKeyListener(keyListener());
+    private void addComponentsToContainer(Container container) {
+        container.setLayout(new BoxLayout(container, Y_AXIS));
 
+        createGraphicInterface(container);
+        initializeTiles(container);
+    }
+
+    private void createGraphicInterface(Container container) {
+        JPanel panel = new JPanel();
+        panel.setSize(400, 300);
+        JLabel label = new JLabel();
+        label.setSize(400, 300);
+        label.setText("Start New Game");
+        panel.add(label);
+        container.add(panel);
+    }
+
+
+    private void displayFrame() {
+        frame.setLocationRelativeTo(null);
+        frame.addKeyListener(keyListener());
         updateJButtons();
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -48,19 +65,24 @@ public class Application {
         };
     }
 
-    public void initializeTiles() {
+    private void initializeTiles(Container container) {
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(4, 4));
+        panel.setSize(400, 100);
+
         for (int y = 0; y < 4; y++) {
             for (int x = 0; x < 4; x++) {
-                tiles[x][y] = new Tile(createSingleJButton());
+                tiles[x][y] = new Tile(createSingleJButton(panel));
             }
         }
+        container.add(panel);
     }
 
-    private JButton createSingleJButton() {
+    private JButton createSingleJButton(JPanel panel) {
         JButton jButton = new JButton("");
-        jButton.setPreferredSize(new Dimension(50, 50));
+        jButton.setPreferredSize(new Dimension(100, 100));
         jButton.setEnabled(false);
-        frame.add(jButton);
+        panel.add(jButton);
         return jButton;
     }
 
