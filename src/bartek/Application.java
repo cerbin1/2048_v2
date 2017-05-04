@@ -37,6 +37,27 @@ public class Application {
     }
 
 
+    private void createGameBoard(Container container) {
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(4, 4));
+        panel.setSize(400, 100);
+
+        for (int y = 0; y < 4; y++) {
+            for (int x = 0; x < 4; x++) {
+                tiles[x][y] = new Tile(createSingleJButton(panel));
+            }
+        }
+        container.add(panel);
+    }
+
+    private JButton createSingleJButton(JPanel panel) {
+        JButton jButton = new JButton();
+        jButton.setPreferredSize(new Dimension(100, 100));
+        jButton.setEnabled(false);
+        panel.add(jButton);
+        return jButton;
+    }
+
     private void displayFrame() {
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
@@ -71,27 +92,6 @@ public class Application {
 
     private void updatePoints(int points) {
         this.labelPoints.setText(Integer.toString(points));
-    }
-
-    private void createGameBoard(Container container) {
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(4, 4));
-        panel.setSize(400, 100);
-
-        for (int y = 0; y < 4; y++) {
-            for (int x = 0; x < 4; x++) {
-                tiles[x][y] = new Tile(createSingleJButton(panel));
-            }
-        }
-        container.add(panel);
-    }
-
-    private JButton createSingleJButton(JPanel panel) {
-        JButton jButton = new JButton("");
-        jButton.setPreferredSize(new Dimension(100, 100));
-        jButton.setEnabled(false);
-        panel.add(jButton);
-        return jButton;
     }
 
 

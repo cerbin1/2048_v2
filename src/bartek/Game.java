@@ -2,8 +2,9 @@ package bartek;
 
 import bartek.direction.*;
 
-import java.awt.event.KeyEvent;
 import java.util.Random;
+
+import static java.awt.event.KeyEvent.*;
 
 public class Game {
     private final Board board;
@@ -22,43 +23,47 @@ public class Game {
         }
     }
 
+    private boolean canAddNewField() {
+        return board.countEmptyFields() != 0;
+    }
+
     private void addNewField() {
         while (true) {
-            int randomX = random.nextInt(4);
-            int randomY = random.nextInt(4);
-            if (board.getFields()[randomX][randomY] == 0) {
-                board.getFields()[randomX][randomY] = 2;
+            int x = random.nextInt(4);
+            int y = random.nextInt(4);
+            if (board.getFields()[x][y] == 0) {
+                board.getFields()[x][y] = 2;
                 break;
             }
         }
     }
 
-    private boolean canAddNewField() {
-        return board.countEmptyFields() != 0;
-    }
-
     public void move(int keyCode) {
-        Direction direction = null;
-        if (keyCode == KeyEvent.VK_DOWN) {
-            direction = new Down();
-        }
-
-        if (keyCode == KeyEvent.VK_UP) {
-            direction = new Up();
-        }
-
-        if (keyCode == KeyEvent.VK_LEFT) {
-            direction = new Left();
-        }
-
-        if (keyCode == KeyEvent.VK_RIGHT) {
-            direction = new Right();
-        }
+        Direction direction = setDirection(keyCode);
 
         if (direction != null) {
             direction.move(board);
             setNewField();
         }
+    }
+
+    private Direction setDirection(int keyCode) {
+        if (keyCode == VK_DOWN) {
+            return new Down();
+        }
+
+        if (keyCode == VK_UP) {
+            return new Up();
+        }
+
+        if (keyCode == VK_LEFT) {
+            return new Left();
+        }
+
+        if (keyCode == VK_RIGHT) {
+            return new Right();
+        }
+        return null;
     }
 
     public Board getBoard() {
