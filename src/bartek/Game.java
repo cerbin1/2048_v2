@@ -1,9 +1,6 @@
 package bartek;
 
-import bartek.direction.Down;
-import bartek.direction.Left;
-import bartek.direction.Right;
-import bartek.direction.Up;
+import bartek.direction.*;
 
 import java.awt.event.KeyEvent;
 import java.util.Random;
