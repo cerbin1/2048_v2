@@ -14,8 +14,8 @@ public class Application {
     private final Game game;
 
     private Application() {
-        addComponentsToContainer(frame.getContentPane());
         game = new Game();
+        addComponentsToContainer(frame.getContentPane());
     }
 
     private void addComponentsToContainer(Container container) {
@@ -29,7 +29,7 @@ public class Application {
         JPanel panel = new JPanel();
         panel.setSize(400, 300);
         points.setSize(400, 300);
-        points.setText("Start New Game");
+        updatePoints(game.getPoints());
         panel.add(points);
         container.add(panel);
     }
