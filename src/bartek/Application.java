@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import static javax.swing.BoxLayout.Y_AXIS;
-import static javax.swing.WindowConstants.*;
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class Application {
     private final JFrame frame = new JFrame("1024");
@@ -78,9 +78,13 @@ public class Application {
 
             @Override
             public void keyPressed(KeyEvent e) {
-                game.move(e.getKeyCode());
-                updatePoints(game.getPoints());
-                updateJButtons();
+                if (game.isGameDone()) {
+                    displayEndGameMessage();
+                } else {
+                    game.move(e.getKeyCode());
+                    updatePoints(game.getPoints());
+                    updateJButtons();
+                }
             }
 
             @Override
@@ -88,6 +92,10 @@ public class Application {
 
             }
         };
+    }
+
+    private void displayEndGameMessage() {
+        labelPoints.setText("Koniec gry. Twoj wynik: " + game.getPoints());
     }
 
     private void updatePoints(int points) {

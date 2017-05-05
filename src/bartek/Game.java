@@ -10,6 +10,7 @@ public class Game {
     private final Board board;
     private final PointsCounter pointsCounter = new PointsCounter();
     private static final Random random = new Random();
+    private boolean done = false;
 
     public Game() {
         board = new Board(pointsCounter);
@@ -42,8 +43,13 @@ public class Game {
         Direction direction = setDirection(keyCode);
 
         if (direction != null) {
-            direction.move(board);
-            setNewField();
+            if(board.canMove()) {
+                direction.move(board);
+                setNewField();
+            }
+            else {
+                done = true;
+            }
         }
     }
 
@@ -72,5 +78,9 @@ public class Game {
 
     public int getPoints() {
         return pointsCounter.getPoints();
+    }
+
+    public boolean isGameDone() {
+        return done;
     }
 }
