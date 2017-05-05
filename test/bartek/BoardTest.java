@@ -2,8 +2,7 @@ package bartek;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class BoardTest {
 
@@ -768,5 +767,72 @@ public class BoardTest {
 
         // then
         assertEquals(0, result);
+    }
+
+    @Test
+    public void shouldBeAbleToMoveWhenThereAreEmptyFields() {
+        // given
+        Board board = setBoard(new int[][]{
+                {0, 2, 0, 2},
+                {2, 2, 0, 0},
+                {0, 0, 0, 2},
+                {2, 2, 2, 2}});
+
+        // when
+        boolean canMove = board.canMove();
+
+        // then
+        assertTrue(canMove);
+
+    }
+
+    @Test
+    public void shouldBeAbleToMoveWhenFieldsCanJoinHorizontally() {
+        // given
+        Board board = setBoard(new int[][]{
+                {4, 16, 4, 2},
+                {2, 2, 8, 32},
+                {4, 16, 4, 2},
+                {8, 64, 2, 128}});
+
+        // when
+        boolean canMove = board.canMove();
+
+        // then
+        assertTrue(canMove);
+    }
+
+    @Test
+    public void shouldBeAbleToMoveWhenFieldsCanJoinVertically() {
+        // given
+        Board board = setBoard(new int[][]{
+                {2, 16, 4, 2},
+                {2, 4, 8, 32},
+                {4, 16, 4, 2},
+                {8, 64, 2, 128}});
+
+        // when
+        boolean canMove = board.canMove();
+
+        // then
+        assertTrue(canMove);
+    }
+
+    @Test
+    public void shouldNotBeAbleToMoveWhenNoEmptyFieldsAndFieldsCantJoin() {
+        // given
+        Board board = setBoard(new int[][]{
+                {2, 4, 8, 16},
+                {32, 64, 128, 256},
+                {2, 4, 8, 16},
+                {32, 64, 128, 256}});
+
+        // when
+        boolean canMove = board.canMove();
+
+        // then
+        assertFalse(canMove);
+
+
     }
 }

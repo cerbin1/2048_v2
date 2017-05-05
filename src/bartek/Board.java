@@ -84,4 +84,22 @@ public class Board {
         }
         return emptyFields;
     }
+
+    public boolean canMove() {
+        if (countEmptyFields() != 0) {
+            return true;
+        }
+        for (int y = 0; y < 4; y++) {
+            for (int x = 0; x < 3; x++) {
+                if (fieldsCanJoin(y, x)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean fieldsCanJoin(int y, int x) {
+        return fields[y][x] == fields[y][x + 1] || fields[x][y] == fields[x + 1][y];
+    }
 }
