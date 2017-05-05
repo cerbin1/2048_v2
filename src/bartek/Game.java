@@ -7,9 +7,11 @@ import java.util.Random;
 import static java.awt.event.KeyEvent.*;
 
 public class Game {
+    private static final Random random = new Random();
+
     private final Board board;
     private final PointsCounter pointsCounter = new PointsCounter();
-    private static final Random random = new Random();
+
     private boolean done = false;
 
     public Game() {
@@ -32,22 +34,29 @@ public class Game {
         while (true) {
             int x = random.nextInt(4);
             int y = random.nextInt(4);
-            if (board.getFields()[x][y] == 0) {
-                board.getFields()[x][y] = 2;
+            if (isFieldEmpty(x, y)) {
+                setFieldWithDefaultValue(x, y);
                 break;
             }
         }
+    }
+
+    private boolean isFieldEmpty(int x, int y) {
+        return board.getFields()[x][y] == 0;
+    }
+
+    private void setFieldWithDefaultValue(int x, int y) {
+        board.getFields()[x][y] = 2;
     }
 
     public void move(int keyCode) {
         Direction direction = setDirection(keyCode);
 
         if (direction != null) {
-            if(board.canMove()) {
+            if (board.canMove()) {
                 direction.move(board);
                 setNewField();
-            }
-            else {
+            } else {
                 done = true;
             }
         }
