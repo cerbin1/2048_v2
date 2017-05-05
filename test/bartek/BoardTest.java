@@ -783,7 +783,6 @@ public class BoardTest {
 
         // then
         assertTrue(canMove);
-
     }
 
     @Test
@@ -832,7 +831,5 @@ public class BoardTest {
 
         // then
         assertFalse(canMove);
-
-
     }
 }
