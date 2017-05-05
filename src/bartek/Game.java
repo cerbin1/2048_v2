@@ -4,7 +4,7 @@ import bartek.direction.*;
 
 import java.util.Random;
 
-import static java.awt.event.KeyEvent.*;
+import static bartek.direction.Direction.*;
 
 public class Game {
     private static final Random random = new Random();
@@ -62,24 +62,6 @@ public class Game {
         }
     }
 
-    private Direction setDirection(int keyCode) {
-        if (keyCode == VK_DOWN) {
-            return new Down();
-        }
-
-        if (keyCode == VK_UP) {
-            return new Up();
-        }
-
-        if (keyCode == VK_LEFT) {
-            return new Left();
-        }
-
-        if (keyCode == VK_RIGHT) {
-            return new Right();
-        }
-        return null;
-    }
 
     public Board getBoard() {
         return board;
