@@ -7,14 +7,14 @@ import java.util.Arrays;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
-public class RowTest {
+public class LineMergerTest {
     @Test
     public void shouldMoveField1() {
         // given
-        Row row = new Row(2, 0, 0, 0);
+        LineMerger lineMerger = new LineMerger(2, 0, 0, 0);
 
         // when
-        int[] after = row.joinAndMove();
+        int[] after = lineMerger.mergeAndMove();
 
         // then
         System.out.println(Arrays.toString(after));
@@ -25,10 +25,10 @@ public class RowTest {
     @Test
     public void shouldMoveField2() {
         // given
-        Row row = new Row(0, 2, 0, 0);
+        LineMerger lineMerger = new LineMerger(0, 2, 0, 0);
 
         // when
-        int[] after = row.joinAndMove();
+        int[] after = lineMerger.mergeAndMove();
 
         // then
         System.out.println(Arrays.toString(after));
@@ -39,10 +39,10 @@ public class RowTest {
     @Test
     public void shouldMoveField3() {
         // given
-        Row row = new Row(0, 0, 2, 0);
+        LineMerger lineMerger = new LineMerger(0, 0, 2, 0);
 
         // when
-        int[] after = row.joinAndMove();
+        int[] after = lineMerger.mergeAndMove();
 
         // then
         System.out.println(Arrays.toString(after));
@@ -53,10 +53,10 @@ public class RowTest {
     @Test
     public void shouldMoveField4() {
         // given
-        Row row = new Row(0, 0, 0, 2);
+        LineMerger lineMerger = new LineMerger(0, 0, 0, 2);
 
         // when
-        int[] after = row.joinAndMove();
+        int[] after = lineMerger.mergeAndMove();
 
         // then
         System.out.println(Arrays.toString(after));
@@ -67,10 +67,10 @@ public class RowTest {
     @Test
     public void shouldJoinTwoFields1() {
         // given
-        Row row = new Row(2, 0, 0, 2);
+        LineMerger lineMerger = new LineMerger(2, 0, 0, 2);
 
         // when
-        int[] after = row.joinAndMove();
+        int[] after = lineMerger.mergeAndMove();
 
         // then
         System.out.println(Arrays.toString(after));
@@ -81,10 +81,10 @@ public class RowTest {
     @Test
     public void shouldJoinTwoFields2() {
         // given
-        Row row = new Row(2, 0, 2, 0);
+        LineMerger lineMerger = new LineMerger(2, 0, 2, 0);
 
         // when
-        int[] after = row.joinAndMove();
+        int[] after = lineMerger.mergeAndMove();
 
         // then
         System.out.println(Arrays.toString(after));
@@ -95,10 +95,10 @@ public class RowTest {
     @Test
     public void shouldJoinTwoFields3() {
         // given
-        Row row = new Row(2, 2, 0, 0);
+        LineMerger lineMerger = new LineMerger(2, 2, 0, 0);
 
         // when
-        int[] after = row.joinAndMove();
+        int[] after = lineMerger.mergeAndMove();
 
         // then
         System.out.println(Arrays.toString(after));
@@ -109,10 +109,10 @@ public class RowTest {
     @Test
     public void shouldJoinTwoFields4() {
         // given
-        Row row = new Row(0, 2, 2, 0);
+        LineMerger lineMerger = new LineMerger(0, 2, 2, 0);
 
         // when
-        int[] after = row.joinAndMove();
+        int[] after = lineMerger.mergeAndMove();
 
         // then
         System.out.println(Arrays.toString(after));
@@ -123,10 +123,10 @@ public class RowTest {
     @Test
     public void shouldJoinTwoFields5() {
         // given
-        Row row = new Row(0, 2, 0, 2);
+        LineMerger lineMerger = new LineMerger(0, 2, 0, 2);
 
         // when
-        int[] after = row.joinAndMove();
+        int[] after = lineMerger.mergeAndMove();
 
         // then
         System.out.println(Arrays.toString(after));
@@ -137,10 +137,10 @@ public class RowTest {
     @Test
     public void shouldJoinTwoFields6() {
         // given
-        Row row = new Row(0, 0, 2, 2);
+        LineMerger lineMerger = new LineMerger(0, 0, 2, 2);
 
         // when
-        int[] after = row.joinAndMove();
+        int[] after = lineMerger.mergeAndMove();
 
         // then
         System.out.println(Arrays.toString(after));
@@ -151,10 +151,10 @@ public class RowTest {
     @Test
     public void shouldJoinFourFields() {
         // given
-        Row row = new Row(2, 2, 8, 8);
+        LineMerger lineMerger = new LineMerger(2, 2, 8, 8);
 
         // when
-        int[] after = row.joinAndMove();
+        int[] after = lineMerger.mergeAndMove();
 
         // then
         System.out.println(Arrays.toString(after));
@@ -165,10 +165,10 @@ public class RowTest {
     @Test
     public void shouldJoinAndStopOnField() {
         // given
-        Row row = new Row(0, 4, 2, 2);
+        LineMerger lineMerger = new LineMerger(0, 4, 2, 2);
 
         // when
-        int[] after = row.joinAndMove();
+        int[] after = lineMerger.mergeAndMove();
 
         // then
         System.out.println(Arrays.toString(after));
@@ -179,10 +179,10 @@ public class RowTest {
     @Test
     public void shouldMoveFields() {
         // given
-        Row row = new Row(0, 2, 0, 4);
+        LineMerger lineMerger = new LineMerger(0, 2, 0, 4);
 
         // when
-        int[] after = row.joinAndMove();
+        int[] after = lineMerger.mergeAndMove();
 
         // then
         System.out.println(Arrays.toString(after));
@@ -193,10 +193,10 @@ public class RowTest {
     @Test
     public void shouldNotMoveAndJoin() {
         // given
-        Row row = new Row(2, 4, 8, 32);
+        LineMerger lineMerger = new LineMerger(2, 4, 8, 32);
 
         // when
-        int[] after = row.joinAndMove();
+        int[] after = lineMerger.mergeAndMove();
 
         // then
         System.out.println(Arrays.toString(after));
@@ -207,10 +207,10 @@ public class RowTest {
     @Test
     public void shouldJoinOnlyTwoFields() {
         // given
-        Row row = new Row(2, 2, 4, 0);
+        LineMerger lineMerger = new LineMerger(2, 2, 4, 0);
 
         // when
-        int[] after = row.joinAndMove();
+        int[] after = lineMerger.mergeAndMove();
 
         // then
         System.out.println(Arrays.toString(after));
@@ -221,10 +221,10 @@ public class RowTest {
     @Test
     public void shouldPreferJoinFieldsOnLeft1() {
         // given
-        Row row = new Row(2, 2, 2, 0);
+        LineMerger lineMerger = new LineMerger(2, 2, 2, 0);
 
         // when
-        int[] after = row.joinAndMove();
+        int[] after = lineMerger.mergeAndMove();
 
         // then
         System.out.println(Arrays.toString(after));
@@ -235,10 +235,10 @@ public class RowTest {
     @Test
     public void shouldPreferJoinFieldsOnLeft2() {
         // given
-        Row row = new Row(2, 2, 0, 2);
+        LineMerger lineMerger = new LineMerger(2, 2, 0, 2);
 
         // when
-        int[] after = row.joinAndMove();
+        int[] after = lineMerger.mergeAndMove();
 
         // then
         System.out.println(Arrays.toString(after));
@@ -249,10 +249,10 @@ public class RowTest {
     @Test
     public void shouldPreferJoinFieldsOnLeft3() {
         // given
-        Row row = new Row(0, 2, 2, 2);
+        LineMerger lineMerger = new LineMerger(0, 2, 2, 2);
 
         // when
-        int[] after = row.joinAndMove();
+        int[] after = lineMerger.mergeAndMove();
 
         // then
         System.out.println(Arrays.toString(after));
@@ -263,10 +263,10 @@ public class RowTest {
     @Test
     public void shouldPreferJoinFieldsOnLeft4() {
         // given
-        Row row = new Row(2, 0, 2, 2);
+        LineMerger lineMerger = new LineMerger(2, 0, 2, 2);
 
         // when
-        int[] after = row.joinAndMove();
+        int[] after = lineMerger.mergeAndMove();
 
         // then
         System.out.println(Arrays.toString(after));
@@ -277,10 +277,10 @@ public class RowTest {
     @Test
     public void shouldDoNothingOnEmptyFields() {
         // given
-        Row row = new Row(0, 0, 0, 0);
+        LineMerger lineMerger = new LineMerger(0, 0, 0, 0);
 
         // when
-        int[] after = row.joinAndMove();
+        int[] after = lineMerger.mergeAndMove();
 
         // then
         System.out.println(Arrays.toString(after));
@@ -291,10 +291,10 @@ public class RowTest {
     @Test
     public void shouldJoinFourFieldsAndNotJoinMore() {
         // given
-        Row row = new Row(2, 2, 2, 2);
+        LineMerger lineMerger = new LineMerger(2, 2, 2, 2);
 
         // when
-        int[] after = row.joinAndMove();
+        int[] after = lineMerger.mergeAndMove();
 
         // then
         System.out.println(Arrays.toString(after));
@@ -305,10 +305,10 @@ public class RowTest {
     @Test
     public void shouldMoveLastField() {
         // given
-        Row row = new Row(2, 4, 0, 8);
+        LineMerger lineMerger = new LineMerger(2, 4, 0, 8);
 
         // when
-        int[] after = row.joinAndMove();
+        int[] after = lineMerger.mergeAndMove();
 
         // then
         System.out.println(Arrays.toString(after));
@@ -319,10 +319,10 @@ public class RowTest {
     @Test
     public void shouldMoveLastFieldWhenTwoCentralAreEmpty() {
         // given
-        Row row = new Row(4, 0, 0, 8);
+        LineMerger lineMerger = new LineMerger(4, 0, 0, 8);
 
         // when
-        int[] after = row.joinAndMove();
+        int[] after = lineMerger.mergeAndMove();
 
         // then
         System.out.println(Arrays.toString(after));
@@ -333,36 +333,36 @@ public class RowTest {
     @Test
     public void shouldAddPoints() {
         // given
-        Row row = new Row(2, 2, 0, 0);
+        LineMerger lineMerger = new LineMerger(2, 2, 0, 0);
 
         // when
-        row.joinAndMove();
+        lineMerger.mergeAndMove();
 
         // then
-        assertEquals(4, row.getPoints());
+        assertEquals(4, lineMerger.getPoints());
     }
 
     @Test
     public void shouldAddPointsFromDoubleJoining() {
         // given
-        Row row = new Row(4, 4, 32, 32);
+        LineMerger lineMerger = new LineMerger(4, 4, 32, 32);
 
         // when
-        row.joinAndMove();
+        lineMerger.mergeAndMove();
 
         // then
-        assertEquals(72, row.getPoints());
+        assertEquals(72, lineMerger.getPoints());
     }
 
     @Test
     public void shouldNotAddPoints() {
         // given
-        Row row = new Row(2, 4, 8, 16);
+        LineMerger lineMerger = new LineMerger(2, 4, 8, 16);
 
         // when
-        row.joinAndMove();
+        lineMerger.mergeAndMove();
 
         // then
-        assertEquals(0, row.getPoints());
+        assertEquals(0, lineMerger.getPoints());
     }
 }

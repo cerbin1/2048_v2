@@ -1,55 +1,55 @@
 package bartek;
 
-public class Row {
-    private final int[] row;
+public class LineMerger {
+    private final int[] line;
     private int points;
 
-    public Row(int one, int two, int three, int four) {
-        this.row = new int[]{one, two, three, four};
+    public LineMerger(int one, int two, int three, int four) {
+        this.line = new int[]{one, two, three, four};
     }
 
-    public int[] joinAndMove() {
+    public int[] mergeAndMove() {
         for (int i = 0; i < 3; i++) {
-            if (row[i] == 0) {
+            if (line[i] == 0) {
                 moveEmptyFieldsOnEnd(i);
             }
-            if (row[i + 1] == 0) {
+            if (line[i + 1] == 0) {
                 moveEmptyFieldsOnEnd(i + 1);
             }
-            if (canJoinFields(i)) {
+            if (canMergeFields(i)) {
                 joinWithNext(i);
             }
         }
-        return row;
+        return line;
     }
 
     private void moveEmptyFieldsOnEnd(int startingField) {
         int fieldsLeft = startingField;
-        while (fieldsLeft < 3 && row[startingField] == 0) {
+        while (fieldsLeft < 3 && line[startingField] == 0) {
             collapseFrom(startingField);
             fieldsLeft++;
         }
     }
 
-    private boolean canJoinFields(int i) {
-        return row[i] == row[i + 1];
+    private boolean canMergeFields(int i) {
+        return line[i] == line[i + 1];
     }
 
     private void collapseFrom(int startingPosition) {
         for (int j = startingPosition; j < 3; j++) {
-            row[j] = row[j + 1];
+            line[j] = line[j + 1];
         }
-        row[3] = 0;
+        line[3] = 0;
     }
 
     private void joinWithNext(int i) {
-        row[i] += row[i + 1];
-        row[i + 1] = 0;
-        points += row[i];
+        line[i] += line[i + 1];
+        line[i + 1] = 0;
+        points += line[i];
     }
 
     public void revertValues() {
-        ArrayHelper.revertValues(row);
+        ArrayHelper.revertValues(line);
     }
 
     int getPoints() {

@@ -17,60 +17,74 @@ public class Board {
 
     public void moveFieldsUp() {
         for (int x = 0; x < 4; x++) {
-            Row row = getVerticalRow(x);
-            int[] array = row.joinAndMove();
-            addPoints(row.getPoints());
+            LineMerger lineMerger = getRow(x);
+            int[] merged = lineMerger.mergeAndMove();
+            addPoints(lineMerger.getPoints());
             for (int y = 0; y < 4; y++) {
-                fields[x][y] = array[y];
+                fields[x][y] = merged[y];
             }
         }
     }
 
     public void moveFieldsDown() {
         for (int x = 0; x < 4; x++) {
-            Row row = getVerticalRow(x);
-            row.revertValues();
-            int[] array = revertValues(row.joinAndMove());
-            addPoints(row.getPoints());
+            LineMerger lineMerger = getRow(x);
+            lineMerger.revertValues();
+            int[] merged = revertValues(lineMerger.mergeAndMove());
+            addPoints(lineMerger.getPoints());
             for (int y = 0; y < 4; y++) {
-                fields[x][y] = array[y];
+                fields[x][y] = merged[y];
             }
         }
     }
 
-    private Row getVerticalRow(int x) {
-        return new Row(fields[x][0], fields[x][1], fields[x][2], fields[x][3]);
+    private LineMerger getRow(int x) {
+        return new LineMerger(fields[x][0], fields[x][1], fields[x][2], fields[x][3]);
     }
 
     public void moveFieldsLeft() {
         for (int y = 0; y < 4; y++) {
-            Row row = getHorizontalRow(y);
-            int[] array = row.joinAndMove();
-            addPoints(row.getPoints());
+            LineMerger lineMerger = getColumn(y);
+            int[] merged = lineMerger.mergeAndMove();
+            addPoints(lineMerger.getPoints());
             for (int x = 0; x < 4; x++) {
-                fields[x][y] = array[x];
+                fields[x][y] = merged[x];
             }
         }
     }
 
     public void moveFieldsRight() {
         for (int y = 0; y < 4; y++) {
-            Row row = getHorizontalRow(y);
-            row.revertValues();
-            int[] array = revertValues(row.joinAndMove());
-            addPoints(row.getPoints());
+            LineMerger lineMerger = getColumn(y);
+            lineMerger.revertValues();
+            int[] merged = revertValues(lineMerger.mergeAndMove());
+            addPoints(lineMerger.getPoints());
             for (int x = 0; x < 4; x++) {
-                fields[x][y] = array[x];
+                fields[x][y] = merged[x];
             }
         }
     }
 
-    private Row getHorizontalRow(int y) {
-        return new Row(fields[0][y], fields[1][y], fields[2][y], fields[3][y]);
+    private LineMerger getColumn(int y) {
+        return new LineMerger(fields[0][y], fields[1][y], fields[2][y], fields[3][y]);
     }
 
     private void addPoints(int points) {
         pointsCounter.addPoints(points);
+    }
+
+    public boolean canMove() {
+        if (isAnyFieldEmpty()) {
+            return true;
+        }
+        for (int y = 0; y < 4; y++) {
+            for (int x = 0; x < 3; x++) {
+                if (canFieldsJoin(y, x)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public boolean isAnyFieldEmpty() {
@@ -84,21 +98,7 @@ public class Board {
         return false;
     }
 
-    public boolean canMove() {
-        if (isAnyFieldEmpty()) {
-            return true;
-        }
-        for (int y = 0; y < 4; y++) {
-            for (int x = 0; x < 3; x++) {
-                if (fieldsCanJoin(y, x)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    private boolean fieldsCanJoin(int y, int x) {
+    private boolean canFieldsJoin(int y, int x) {
         return fields[y][x] == fields[y][x + 1] || fields[x][y] == fields[x + 1][y];
     }
 }
