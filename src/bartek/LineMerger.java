@@ -11,10 +11,10 @@ public class LineMerger {
     public int[] mergeAndMove() {
         for (int i = 0; i < 3; i++) {
             if (line[i] == 0) {
-                moveEmptyFieldsOnEnd(i);
+                moveEmptyFieldsToEndFrom(i);
             }
             if (line[i + 1] == 0) {
-                moveEmptyFieldsOnEnd(i + 1);
+                moveEmptyFieldsToEndFrom(i + 1);
             }
             if (canMergeFields(i)) {
                 joinWithNext(i);
@@ -23,7 +23,7 @@ public class LineMerger {
         return line;
     }
 
-    private void moveEmptyFieldsOnEnd(int startingField) {
+    private void moveEmptyFieldsToEndFrom(int startingField) {
         int fieldsLeft = startingField;
         while (fieldsLeft < 3 && line[startingField] == 0) {
             collapseFrom(startingField);
