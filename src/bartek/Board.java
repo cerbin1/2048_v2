@@ -1,6 +1,9 @@
 package bartek;
 
+import java.util.Arrays;
+
 import static bartek.ArrayHelper.revertValues;
+import static java.util.Arrays.stream;
 
 public class Board {
     private final int[][] fields;
@@ -88,14 +91,9 @@ public class Board {
     }
 
     public boolean isAnyFieldEmpty() {
-        for (int y = 0; y < 4; y++) {
-            for (int x = 0; x < 4; x++) {
-                if (fields[x][y] == 0) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return stream(fields)
+                .flatMapToInt(Arrays::stream)
+                .anyMatch(value -> value == 0);
     }
 
     private boolean canFieldsJoin(int y, int x) {
