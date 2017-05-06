@@ -27,7 +27,7 @@ public class Game {
     }
 
     private boolean canAddNewField() {
-        return board.countEmptyFields() != 0;
+        return board.isAnyFieldEmpty();
     }
 
     private void addNewField() {
@@ -61,7 +61,6 @@ public class Game {
             }
         }
     }
-
 
     public Board getBoard() {
         return board;

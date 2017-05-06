@@ -726,35 +726,19 @@ public class BoardTest {
     }
 
     @Test
-    public void shouldReturnNoFieldsEmpty() {
+    public void shouldReturnTrueIfBoardIsNotFull() {
         // given
         Board board = new Board(new PointsCounter());
 
         // when
-        int result = board.countEmptyFields();
+        boolean result = board.isAnyFieldEmpty();
 
         // then
-        assertEquals(16, result);
+        assertTrue(result);
     }
 
     @Test
-    public void shouldCountEmptyFieldsProperly() {
-        // given
-        Board board = setBoard(new int[][]{
-                {0, 16, 4, 2},
-                {0, 0, 8, 2},
-                {0, 2, 0, 2},
-                {2, 0, 0, 2}});
-
-        // when
-        int result = board.countEmptyFields();
-
-        // then
-        assertEquals(7, result);
-    }
-
-    @Test
-    public void shouldReturnZeroEmptyFields() {
+    public void shouldReturnFalseIfBoardIsFull() {
         // given
         Board board = setBoard(new int[][]{
                 {2, 16, 4, 2},
@@ -763,10 +747,10 @@ public class BoardTest {
                 {2, 2, 2, 2}});
 
         // when
-        int result = board.countEmptyFields();
+        boolean result = board.isAnyFieldEmpty();
 
         // then
-        assertEquals(0, result);
+        assertFalse(result);
     }
 
     @Test

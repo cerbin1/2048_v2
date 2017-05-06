@@ -73,20 +73,19 @@ public class Board {
         pointsCounter.addPoints(points);
     }
 
-    public int countEmptyFields() {
-        int emptyFields = 0;
+    public boolean isAnyFieldEmpty() {
         for (int y = 0; y < 4; y++) {
             for (int x = 0; x < 4; x++) {
                 if (fields[x][y] == 0) {
-                    emptyFields++;
+                    return true;
                 }
             }
         }
-        return emptyFields;
+        return false;
     }
 
     public boolean canMove() {
-        if (countEmptyFields() != 0) {
+        if (isAnyFieldEmpty()) {
             return true;
         }
         for (int y = 0; y < 4; y++) {
