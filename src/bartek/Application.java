@@ -139,13 +139,13 @@ public class Application {
     private void updateTiles() {
         for (int y = 0; y < 4; y++) {
             for (int x = 0; x < 4; x++) {
-                setTextField(y, x);
+                setImage(y, x);
             }
         }
     }
 
-    private void setTextField(int y, int x) {
-        tiles[x][y].setText(Integer.toString(getField(x, y)));
+    private void setImage(int y, int x) {
+        tiles[x][y].getTile().setIcon(new ImageRepository().get(Integer.toString(getField(x, y)) + ".png"));
     }
 
     private int getField(int x, int y) {
