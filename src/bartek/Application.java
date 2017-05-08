@@ -7,6 +7,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import static bartek.ImageRepository.get;
 import static javax.swing.BoxLayout.Y_AXIS;
 import static javax.swing.SwingConstants.*;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
@@ -145,7 +146,7 @@ public class Application {
     }
 
     private void setImage(int y, int x) {
-        tiles[x][y].getTile().setIcon(new ImageRepository().get(Integer.toString(getField(x, y)) + ".png"));
+        tiles[x][y].getTile().setIcon(get(Integer.toString(getField(x, y))));
     }
 
     private int getField(int x, int y) {
