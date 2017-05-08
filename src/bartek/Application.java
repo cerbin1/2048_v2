@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import static javax.swing.BoxLayout.Y_AXIS;
 import static javax.swing.SwingConstants.*;
@@ -15,7 +17,7 @@ public class Application {
     private final JButton newGame = new JButton();
     private final Tile[][] tiles = new Tile[4][4];
 
-    private final Game game;
+    private Game game;
 
     private Application() {
         game = new Game();
@@ -53,6 +55,20 @@ public class Application {
         newGame.setHorizontalAlignment(LEFT);
         newGame.setHorizontalAlignment(CENTER);
         newGame.setSize(200, 300);
+        newGame.addKeyListener(keyListener());
+        newGame.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                startNewGame();
+            }
+        });
+    }
+
+    private void startNewGame() {
+        game = new Game();
+        updatePoints(game.getPoints());
+        updateJButtons();
     }
 
 
