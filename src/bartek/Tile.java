@@ -3,13 +3,17 @@ package bartek;
 import javax.swing.*;
 
 public class Tile {
-    private JButton button;
+    private JLabel tile;
 
-    public Tile(JButton button) {
-        this.button = button;
+    public Tile(JLabel tile) {
+        this.tile = tile;
     }
 
     public void setText(String text) {
-        button.setText(text);
+        tile.setText(text);
+    }
+
+    public JLabel getTile() {
+        return tile;
     }
 }

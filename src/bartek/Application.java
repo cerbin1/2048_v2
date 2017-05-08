@@ -68,7 +68,7 @@ public class Application {
     private void startNewGame() {
         game = new Game();
         updatePoints(game.getPoints());
-        updateJButtons();
+        updateTiles();
     }
 
 
@@ -79,25 +79,24 @@ public class Application {
 
         for (int y = 0; y < 4; y++) {
             for (int x = 0; x < 4; x++) {
-                tiles[x][y] = new Tile(createSingleJButton(panel));
+                tiles[x][y] = new Tile(createSingleTile(panel));
             }
         }
         container.add(panel);
     }
 
-    private JButton createSingleJButton(JPanel panel) {
-        JButton jButton = new JButton();
-        jButton.setPreferredSize(new Dimension(100, 100));
-        jButton.setEnabled(false);
-        panel.add(jButton);
-        return jButton;
+    private JLabel createSingleTile(JPanel panel) {
+        JLabel tile = new JLabel();
+        tile.setPreferredSize(new Dimension(100, 100));
+        panel.add(tile);
+        return tile;
     }
 
     private void displayFrame() {
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.addKeyListener(keyListener());
-        updateJButtons();
+        updateTiles();
 
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setVisible(true);
@@ -118,7 +117,7 @@ public class Application {
                 } else {
                     game.move(e.getKeyCode());
                     updatePoints(game.getPoints());
-                    updateJButtons();
+                    updateTiles();
                 }
             }
 
@@ -137,8 +136,7 @@ public class Application {
         this.labelPoints.setText("Wynik : " + Integer.toString(points));
     }
 
-
-    private void updateJButtons() {
+    private void updateTiles() {
         for (int y = 0; y < 4; y++) {
             for (int x = 0; x < 4; x++) {
                 setTextField(y, x);
