@@ -6,11 +6,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import static javax.swing.BoxLayout.Y_AXIS;
+import static javax.swing.SwingConstants.*;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class Application {
     private final JFrame frame = new JFrame("1024");
-    private final JLabel labelPoints = new JLabel();
+    private final JLabel labelPoints = new JLabel("", CENTER);
+    private final JButton newGame = new JButton();
     private final Tile[][] tiles = new Tile[4][4];
 
     private final Game game;
@@ -28,12 +30,29 @@ public class Application {
     }
 
     private void createUserInterface(Container container) {
-        JPanel userInterface = new JPanel();
-        userInterface.setSize(400, 300);
-        labelPoints.setSize(400, 300);
-        updatePoints(game.getPoints());
+        JPanel userInterface = new JPanel(new GridLayout(1, 2));
+        userInterface.setSize(200, 300);
+
+        setNewGameButton();
+        setLabelPoints();
+
+        userInterface.add(newGame);
         userInterface.add(labelPoints);
+
         container.add(userInterface);
+    }
+
+    private void setLabelPoints() {
+        labelPoints.setSize(400, 300);
+        labelPoints.setHorizontalTextPosition(RIGHT);
+        updatePoints(game.getPoints());
+    }
+
+    private void setNewGameButton() {
+        newGame.setText("Nowa gra");
+        newGame.setHorizontalAlignment(LEFT);
+        newGame.setHorizontalAlignment(CENTER);
+        newGame.setSize(200, 300);
     }
 
 
@@ -99,7 +118,7 @@ public class Application {
     }
 
     private void updatePoints(int points) {
-        this.labelPoints.setText(Integer.toString(points));
+        this.labelPoints.setText("Wynik : " + Integer.toString(points));
     }
 
 
