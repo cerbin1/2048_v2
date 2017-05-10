@@ -1,6 +1,6 @@
-package bartek.direction;
+package bartek.logic.direction;
 
-import bartek.Board;
+import bartek.logic.Board;
 
 import static java.awt.event.KeyEvent.*;
 

@@ -1,10 +1,10 @@
-package bartek;
+package bartek.logic;
 
-import bartek.direction.*;
+import bartek.logic.direction.Direction;
 
 import java.util.Random;
 
-import static bartek.direction.Direction.*;
+import static bartek.logic.direction.Direction.*;
 
 public class Game {
     private static final Random random = new Random();

@@ -1,4 +1,4 @@
-package bartek;
+package bartek.logic;
 
 public class PointsCounter {
     private int points;

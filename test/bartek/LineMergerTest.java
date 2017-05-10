@@ -1,5 +1,6 @@
 package bartek;
 
+import bartek.logic.LineMerger;
 import org.junit.Test;
 
 import java.util.Arrays;

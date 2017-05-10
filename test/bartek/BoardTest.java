@@ -1,5 +1,7 @@
 package bartek;
 
+import bartek.logic.Board;
+import bartek.logic.PointsCounter;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

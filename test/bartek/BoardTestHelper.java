@@ -1,5 +1,8 @@
 package bartek;
 
+import bartek.logic.Board;
+import bartek.logic.PointsCounter;
+
 public class BoardTestHelper extends Board {
     public BoardTestHelper(PointsCounter pointsCounter) {
         super(pointsCounter);

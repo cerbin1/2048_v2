@@ -1,5 +1,7 @@
 package bartek;
 
+import bartek.logic.Game;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;

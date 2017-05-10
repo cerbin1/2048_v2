@@ -1,8 +1,8 @@
-package bartek;
+package bartek.logic;
 
 import java.util.Arrays;
 
-import static bartek.ArrayHelper.revertValues;
+import static bartek.logic.ArrayHelper.revertValues;
 import static java.util.Arrays.stream;
 
 public class Board {

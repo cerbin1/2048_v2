@@ -1,4 +1,6 @@
-package bartek;
+package bartek.logic;
+
+import bartek.logic.ArrayHelper;
 
 public class LineMerger {
     private final int[] line;
@@ -52,7 +54,7 @@ public class LineMerger {
         ArrayHelper.revertValues(line);
     }
 
-    int getPoints() {
+    public int getPoints() {
         return points;
     }
 }
