@@ -1,4 +1,4 @@
-package bartek;
+package bartek.logic;
 
 import bartek.logic.PointsCounter;
 import org.junit.Assert;

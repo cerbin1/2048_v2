@@ -1,4 +1,4 @@
-package bartek;
+package bartek.logic;
 
 import bartek.logic.Board;
 import bartek.logic.PointsCounter;
