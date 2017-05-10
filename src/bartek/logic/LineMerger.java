@@ -3,7 +3,7 @@ package bartek.logic;
 import bartek.logic.ArrayHelper;
 
 public class LineMerger {
-    private final int[] line;
+    private int[] line;
     private int points;
 
     public LineMerger(int one, int two, int three, int four) {
@@ -50,8 +50,8 @@ public class LineMerger {
         points += line[i];
     }
 
-    public void revertValues() {
-        ArrayHelper.revertValues(line);
+    void revertValues() {
+        line = ArrayHelper.revertValues(line);
     }
 
     public int getPoints() {
