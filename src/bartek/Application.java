@@ -153,7 +153,7 @@ public class Application {
     }
 
     private int getField(int x, int y) {
-        return game.getBoard().getFields()[x][y];
+        return game.getField(x, y);
     }
 
     public static void main(String[] args) {

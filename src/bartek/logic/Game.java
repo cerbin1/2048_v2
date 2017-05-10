@@ -73,4 +73,8 @@ public class Game {
     public boolean isGameDone() {
         return done;
     }
+
+    public int getField(int x, int y) {
+        return board.getFields()[x][y];
+    }
 }
