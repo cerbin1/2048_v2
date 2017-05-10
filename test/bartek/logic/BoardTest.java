@@ -816,4 +816,29 @@ public class BoardTest {
         // then
         assertFalse(canMove);
     }
+
+    @Test
+    public void shouldEndGameWhenAfterMoveNoMovesAvailable() {
+        // given
+        Board before = setBoard(new int[][]{
+                {2, 2, 8, 16},
+                {32, 64, 128, 256},
+                {2, 4, 8, 16},
+                {32, 64, 128, 256}});
+
+        Board after = setBoard(new int[][]{
+                {4, 2, 8, 16},
+                {32, 64, 128, 256},
+                {2, 4, 8, 16},
+                {32, 64, 128, 256}});
+
+        // when
+        boolean beforeMove = before.canMove();
+        boolean afterMove = after.canMove();
+
+        // then
+        assertTrue(beforeMove);
+        assertFalse(afterMove);
+
+    }
 }

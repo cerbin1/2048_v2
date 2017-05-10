@@ -4,7 +4,7 @@ import bartek.logic.direction.Direction;
 
 import java.util.Random;
 
-import static bartek.logic.direction.Direction.*;
+import static bartek.logic.direction.Direction.setDirection;
 
 public class Game {
     private static final Random random = new Random();
@@ -53,10 +53,9 @@ public class Game {
         Direction direction = setDirection(keyCode);
 
         if (direction != null) {
-            if (board.canMove()) {
-                direction.move(board);
-                setNewField();
-            } else {
+            direction.move(board);
+            setNewField();
+            if (!board.canMove()) {
                 done = true;
             }
         }

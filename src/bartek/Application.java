@@ -116,12 +116,13 @@ public class Application {
 
             @Override
             public void keyPressed(KeyEvent e) {
-                if (game.isGameDone()) {
-                    displayEndGameMessage();
-                } else {
+                if (!game.isGameDone()) {
                     game.move(e.getKeyCode());
                     updatePoints(game.getPoints());
                     updateTiles();
+                }
+                if (game.isGameDone()) {
+                    displayEndGameMessage();
                 }
             }
 
