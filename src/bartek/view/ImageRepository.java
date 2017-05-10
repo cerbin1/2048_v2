@@ -1,4 +1,4 @@
-package bartek;
+package bartek.view;
 
 import javax.swing.*;
 

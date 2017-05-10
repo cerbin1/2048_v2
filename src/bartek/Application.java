@@ -1,6 +1,7 @@
 package bartek;
 
 import bartek.logic.Game;
+import bartek.view.Tile;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,7 +10,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import static bartek.ImageRepository.get;
+import static bartek.view.ImageRepository.get;
 import static javax.swing.BoxLayout.Y_AXIS;
 import static javax.swing.SwingConstants.*;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
