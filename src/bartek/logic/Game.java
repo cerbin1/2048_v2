@@ -1,10 +1,10 @@
 package bartek.logic;
 
-import bartek.logic.direction.Direction;
+import bartek.logic.direction.Move;
 
 import java.util.Random;
 
-import static bartek.logic.direction.Direction.setDirection;
+import static bartek.logic.direction.Move.getDirection;
 
 public class Game {
     private static final Random random = new Random();
@@ -50,7 +50,7 @@ public class Game {
     }
 
     public void move(int keyCode) {
-        Direction direction = setDirection(keyCode);
+        Move direction = getDirection(keyCode);
 
         if (direction != null) {
             direction.move(board);
