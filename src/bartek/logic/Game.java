@@ -61,10 +61,6 @@ public class Game {
         }
     }
 
-    public Board getBoard() {
-        return board;
-    }
-
     public int getPoints() {
         return pointsCounter.getPoints();
     }
