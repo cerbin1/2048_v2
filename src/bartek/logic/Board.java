@@ -9,12 +9,12 @@ public class Board {
     private final int[][] fields;
     private PointsCounter pointsCounter;
 
-    public Board(PointsCounter pointsCounter) {
+    Board(PointsCounter pointsCounter) {
         this.pointsCounter = pointsCounter;
         fields = new int[4][4];
     }
 
-    public int[][] getFields() {
+    int[][] getFields() {
         return fields;
     }
 
@@ -76,7 +76,7 @@ public class Board {
         pointsCounter.addPoints(points);
     }
 
-    public boolean canMove() {
+    boolean canMove() {
         if (isAnyFieldEmpty()) {
             return true;
         }
@@ -90,7 +90,7 @@ public class Board {
         return false;
     }
 
-    public boolean isAnyFieldEmpty() {
+    boolean isAnyFieldEmpty() {
         return stream(fields)
                 .flatMapToInt(Arrays::stream)
                 .anyMatch(value -> value == 0);
